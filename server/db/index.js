@@ -2,7 +2,7 @@ const debug = require('debug')('db');
 const mongodb = require('mongodb');
 const mongoClient = mongodb.MongoClient;
 const ObjectID = mongodb.ObjectID;  
-const url = process.env.MONGOLAB_GRAY_URI;
+const url = process.env.MONGODB_URI;
 const assert = require('assert');
 
 const dbname = 'heroku_b43v72jl';
