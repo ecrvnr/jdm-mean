@@ -5,6 +5,8 @@ const ObjectID = mongodb.ObjectID;
 const url = process.env.MONGOLAB_GRAY_URI;
 const assert = require('assert');
 
+const dbname = 'heroku_b43v72jl';
+
 debug('Initializing db');
 
 module.exports = {
@@ -13,7 +15,7 @@ module.exports = {
     terms = [];
     mongoClient.connect(url, function(err, client) {
       assert.equal(null, err);
-      var db = client.db('heroku_vzwbm3r5');      
+      var db = client.db(dbname);      
       db.collection('terms').find({}).toArray(function(err, elements){
         Promise.all(
           elements.map(function(element){
@@ -29,7 +31,7 @@ module.exports = {
   save: function(data){
     mongoClient.connect(url, function(err, client) {
       assert.equal(null, err);
-      var db = client.db('heroku_vzwbm3r5');
+      var db = client.db(dbname);
       
       var term = data['term'],
         entries = data['entries'],
@@ -83,7 +85,7 @@ module.exports = {
     debug('db', 'Retrieving term ' + _term + ' from database');
     mongoClient.connect(url, function(err, client) {
       assert.equal(null, err);
-      var db = client.db('heroku_vzwbm3r5');      
+      var db = client.db(dbname);      
       var termObject = {};
       
       db.collection('terms').findOne( {term: _term }, function(err, obj){
@@ -98,7 +100,7 @@ module.exports = {
     debug('db', 'Retrieving term ' + _term + ' from database');
     mongoClient.connect(url, function(err, client) {
       assert.equal(null, err);
-      var db = client.db('heroku_vzwbm3r5');      
+      var db = client.db(dbname);      
       var termObject = {};
       
       var dataObject = {};        
@@ -150,7 +152,7 @@ module.exports = {
   has: function(_term, hasCallback){
     mongoClient.connect(url, function(err, client) {
       assert.equal(null, err); 
-      var db = client.db('heroku_vzwbm3r5');
+      var db = client.db(dbname);
       var found;
       db.collection('terms').count( {term: _term}, function(err, res){
         if(err) throw err;
