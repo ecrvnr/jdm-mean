@@ -13,7 +13,7 @@ module.exports = {
    * Parse the code to fill up our data structure
    */
   parseFull: function(term, body, fullDataInstantiatedCallback){
-    debug('parser.parse','Parsing html');
+    debug('Parsing html');
     var $ = cheerio.load(body);
     
     var $code = $('CODE');
@@ -39,7 +39,7 @@ module.exports = {
     defArray.forEach(element => {
       if(element != '' && element != '\n') {
         termObject['def'].push(element);
-        //debug('parser.def', element);                 
+        //debug(element);                 
       }
     });
     
@@ -66,7 +66,7 @@ module.exports = {
           nodeTypeObject['ntid'] = Number(fields[1]);
           nodeTypeObject['ntname'] = fields[2].split('\'')[1];  
           termObject['nodeTypes'].push(nodeTypeObject);
-          //debug('parser', nodeTypeObject);
+          //debug(nodeTypeObject);
           break;
         
         case 'entry':
@@ -82,7 +82,7 @@ module.exports = {
             entryObject['formatted_name'] = entryObject['formatted_name'].split('\'')[1];         
           }
           dataObject['entries'].push(entryObject);
-          //debug('parser', entryObject);            
+          //debug(entryObject);            
           break;
         
         case 'relType':
@@ -94,7 +94,7 @@ module.exports = {
           relTypeObject['rtgpname'] = fields[3].split('\'')[1]; 
           relTypeObject['rthelp'] = fields[4];
           termObject['relTypes'].push(relTypeObject);
-          //debug('parser', relTypeObject);            
+          //debug(relTypeObject);            
           break;
         
         case 'outRel':
@@ -107,7 +107,7 @@ module.exports = {
           outRelObject['type'] = Number(fields[4]);   
           outRelObject['w'] = Number(fields[5]);           
           dataObject['outRels'].push(outRelObject);
-          //debug('parser', outRelObject);            
+          //debug(outRelObject);            
           break;
         
         case 'inRel':
@@ -129,13 +129,13 @@ module.exports = {
       }
     });
 
-    debug('parser', 'Term JSON Object created');
+    debug('Term JSON Object created');
     fullDataInstantiatedCallback(dataObject);    
   },
 
 
   parseTerm: function(term, body, termDataInstantiatedCallback){
-    debug('parser.parse','Parsing html');
+    debug('Parsing html');
     var $ = cheerio.load(body);
     
     var $code = $('CODE');
@@ -155,7 +155,7 @@ module.exports = {
     defArray.forEach(element => {
       if(element != '' && element != '\n') {
         termObject['def'].push(element);
-        //debug('parser.def', element);                 
+        //debug(element);                 
       }
     });
     
@@ -182,7 +182,7 @@ module.exports = {
           nodeTypeObject['ntid'] = Number(fields[1]);
           nodeTypeObject['ntname'] = fields[2].split('\'')[1];  
           termObject['nodeTypes'].push(nodeTypeObject);
-          //debug('parser', nodeTypeObject);
+          //debug(nodeTypeObject);
           break;
  
         case 'relType':
@@ -194,7 +194,7 @@ module.exports = {
           relTypeObject['rtgpname'] = fields[3].split('\'')[1]; 
           relTypeObject['rthelp'] = fields[4];
           termObject['relTypes'].push(relTypeObject);
-          //debug('parser', relTypeObject);            
+          //debug(relTypeObject);            
           break;
       
         default:
@@ -203,7 +203,7 @@ module.exports = {
       }
     });
 
-    debug('parser', 'Term JSON Object created');
+    debug('Term JSON Object created');
     termDataInstantiatedCallback(termObject);    
   },
 

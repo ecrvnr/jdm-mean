@@ -36,48 +36,48 @@ module.exports = {
 
     db.collection('terms').update({eid: term['eid']}, term, {upsert: true}, function(err) {
       if(err) throw err;
-      debug('db', 'Term ' + term['term'] + ' added to database');
+      debug('Term ' + term['term'] + ' added to database');
     });
 
     db.collection('entries' + term['eid']).remove(function(err) {
       if(err) throw err;
-      debug('db', 'Entries for ' + term['term'] + ' deleted');
+      debug('Entries for ' + term['term'] + ' deleted');
       
       if(entries.length > 0) {          
         db.collection('entries' + term['eid']).insertMany(entries, function(err) {
           if(err) throw err;
-          debug('db', 'Entries for ' + term['term'] + ' added'); 
+          debug('Entries for ' + term['term'] + ' added'); 
         });
       }   
     });
     
     db.collection('outRels' + term['eid']).remove(function(err) {
       if(err) throw err;
-      debug('db', 'Outwards relations for ' + term['term'] + ' deleted');  
+      debug('Outwards relations for ' + term['term'] + ' deleted');  
       
       if(outRels.length > 0) {          
         db.collection('outRels' + term['eid']).insertMany(outRels, function(err) {
           if(err) throw err;
-          debug('db', 'Outwards relations for ' + term['term'] + ' added'); 
+          debug('Outwards relations for ' + term['term'] + ' added'); 
         });
       }
     });
     
     db.collection('inRels' + term['eid']).remove(function(err) {
       if(err) throw err;
-      debug('db', 'Inwards relations for ' + term['term'] + ' deleted');  
+      debug('Inwards relations for ' + term['term'] + ' deleted');  
       
       if(inRels.length > 0) {
         db.collection('inRels' + term['eid']).insertMany(inRels, function(err) {
           if(err) throw err;
-          debug('db', 'Inwards relations for ' + term['term'] + ' added');  
+          debug('Inwards relations for ' + term['term'] + ' added');  
         });
       }
     });      
   },
 
   getTermData: function(_term, termRetrievedCallback){
-    debug('db', 'Retrieving term ' + _term + ' from database');
+    debug('Retrieving term ' + _term + ' from database');
     var termObject = {};
     db.collection('terms').findOne( {term: _term }, function(err, obj){
       if(err) throw err;
@@ -107,7 +107,7 @@ module.exports = {
             dataObject['entries'].push(element);
           })
         ).then(function(){
-          debug('db','Entries retrieved from database');
+          debug('Entries retrieved from database');
 
           db.collection('outRels' + termObject['eid']).find({}).toArray(function(err, elements){
             Promise.all(
@@ -115,7 +115,7 @@ module.exports = {
                 dataObject['outRels'].push(element);
               })
             ).then(function(){
-              debug('db','outRels retrieved from database');
+              debug('outRels retrieved from database');
 
               db.collection('inRels' + termObject['eid']).find({}).toArray(function(err, elements){          
                 Promise.all(
@@ -123,7 +123,7 @@ module.exports = {
                     dataObject['inRels'].push(element);
                   })
                 ).then(function(){
-                  debug('db','inRels retrieved from database');
+                  debug('inRels retrieved from database');
                   fullDataRetrievedCallback(dataObject);
                 });
               });
@@ -139,10 +139,10 @@ module.exports = {
     db.collection('terms').count( {term: _term}, function(err, res){
       if(err) throw err;
       if(res > 0) {
-        debug('db', 'Found term ' + _term + ' in database');
+        debug('Found term ' + _term + ' in database');
         found = true;
       } else { 
-        debug('db', 'Did not find term ' + _term + ' in database'); 
+        debug('Did not find term ' + _term + ' in database'); 
         found = false;
       }
       hasCallback(found);
