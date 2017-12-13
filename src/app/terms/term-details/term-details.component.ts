@@ -15,16 +15,20 @@ export class TermDetailsComponent {
   entries: {}[];
   outRels: {}[];
   inRels: {}[];
+  loading: Boolean;
 
   constructor(private termService: TermService) { }
 
   searchTerm() {
     console.log(this.termString);
+    this.term = null;
+    this.loading = true;
     if (this.termString !== undefined) {
     this.termService.getTerm(this.termString).then((term: Term) => {
       this.term = term;
+      this.termString = null;
+      this.loading = false;
     });
-    this.termString = null;
   }
 }
 
