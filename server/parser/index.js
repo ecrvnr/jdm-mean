@@ -211,7 +211,7 @@ module.exports = {
    * Fetch the html <CODE> content from Rezodump
    */
   fetchHTML: function(term, htmlFetchedCallback){
-    var url = 'http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel=' + escape(term);
+    var url = 'http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel=' + term;
     request.get({url: url, encoding: 'binary'}, function(err, response, body) {
       debug('Fetching HTML from ' + url);
       var enc = charset(response.headers, body) || jschardet.detect(body).encoding.toLowerCase(); 
