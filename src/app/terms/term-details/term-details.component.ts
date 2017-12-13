@@ -20,9 +20,12 @@ export class TermDetailsComponent {
 
   searchTerm() {
     console.log(this.termString);
+    if (this.termString !== undefined) {
     this.termService.getTerm(this.termString).then((term: Term) => {
       this.term = term;
     });
+    this.termString = null;
   }
+}
 
 }
