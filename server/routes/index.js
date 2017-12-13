@@ -6,7 +6,7 @@ const handler = require('../handler')(db);
 
 debug('Intializing routes');
 
-router.get('/term/:term', function (req, res) {
+router.get('/terms/:term', function (req, res) {
   var term = req.params.term.toLowerCase();
   debug('Looking for ' + term);
   handler.getTerm(term, function (termData) {
