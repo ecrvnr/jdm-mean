@@ -16,6 +16,7 @@ mongoClient.connect(url, function(err, client){
 module.exports = {
 
   getAllTerms: function(listRetrievedCallback){
+    debug('Retrieving all terms from database');
     terms = [];   
     db.collection('terms').find({}).toArray(function(err, elements){
       Promise.all(

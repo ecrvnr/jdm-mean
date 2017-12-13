@@ -14,4 +14,11 @@ router.get('/terms/:term', function (req, res) {
   })
 });
 
+router.get('/terms', function (req, res) {
+  debug('Retrieving all terms');
+  handler.getAllTerms(function (data) {
+    res.json(data);
+  });
+});
+
 module.exports = router;

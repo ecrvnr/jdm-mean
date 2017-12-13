@@ -47,6 +47,13 @@ module.exports = function(db)
           });
         }
       });
+    },
+
+
+    getAllTerms: function(termsRetrievedCallback){
+      db.getAllTerms(function(terms){
+        termsRetrievedCallback(terms);
+      });      
     }
-  };
-};
+  }
+}
