@@ -1,91 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
-  <div style="display: inline;">
-    <a class="navbar-brand" href="http://www.jeuxdemots.org/jdm-accueil.php"><img class="logo" src="../../../assets/img/logo.png" alt="Logo jeuxDeMots" /></a>
-  </div>
+  <div *ngIf="term">
 
+    <h1 class="term-string">{{ term.term }}</h1>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto ml-auto">
-          <li class="nav-item">
-              <div class="justify-content-md-center">
-                  <form novalidate (ngSubmit)="searchTerm()" class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="text" name="term" [(ngModel)]="termString" placeholder="Search term..." aria-label="Search" style="width: 600px;">
-                   
-                      <button class="btn btn-outline-secondary" type="button" (click)="searchTerm()">
-                        Search
-                      </button>
-                  </form>
-              </div>
-          </li>
-      </ul>
-  </div>
+    <h4>Definitions</h4>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
+    </ul>
+    <br />
 
-  <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  </nav>
-
-  <div class="container">
-
-    <div class="sk-cube-grid" *ngIf="loading">
-      <div class="sk-cube sk-cube1"></div>
-      <div class="sk-cube sk-cube2"></div>
-      <div class="sk-cube sk-cube3"></div>
-      <div class="sk-cube sk-cube4"></div>
-      <div class="sk-cube sk-cube5"></div>
-      <div class="sk-cube sk-cube6"></div>
-      <div class="sk-cube sk-cube7"></div>
-      <div class="sk-cube sk-cube8"></div>
-      <div class="sk-cube sk-cube9"></div>
-    </div>
-
-    <div *ngIf="term">
-      
-      <h1 class="term-string">{{ term.term }}</h1>
-
-        <h4>Definitions</h4>
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
-        </ul>
-      <br />
-
-      <h4>Relation types</h4>
-      <table class="table table-striped table-responsive">
-        <thead class="thead-dark">
-          <tr>
-            <th>rt</th>
-            <th>rtid</th>
-            <th>rtname</th>
-            <th>rtgpname</th>
-            <th>rthelp</th>
-          </tr>
-        </thead>
-        <tr *ngFor="let relType of term.relTypes">  
-          <td> {{ relType.rt }} </td>
-          <td> {{ relType.rtid }} </td>
-          <td> {{ relType.rtname }} </td>
-          <td> {{ relType.rtgpname }} </td>
-          <td> {{ relType.rthelp }} </td>          
+    <h4>Relation types</h4>
+    <table class="table table-striped table-responsive">
+      <thead class="thead-dark">
+        <tr>
+          <th>rt</th>
+          <th>rtid</th>
+          <th>rtname</th>
+          <th>rtgpname</th>
+          <th>rthelp</th>
         </tr>
-      </table>
-      <br />
-      
+      </thead>
+      <tr *ngFor="let relType of term.relTypes">
+        <td> {{ relType.rt }} </td>
+        <td> {{ relType.rtid }} </td>
+        <td> {{ relType.rtname }} </td>
+        <td> {{ relType.rtgpname }} </td>
+        <td> {{ relType.rthelp }} </td>
+      </tr>
+    </table>
+    <br />
 
-      <h4>Node types</h4>      
-      <table class="table table-striped table-responsive">
-        <thead class="thead-dark">              
-          <tr> 
-            <th>nt</th>
-            <th>ntid</th>
-            <th>ntname</th>  
-          </tr>  
-        </thead>            
-        <tr *ngFor="let nodeType of term.nodeTypes">  
-          <td> {{ nodeType.nt }} </td>
-          <td> {{ nodeType.ntid }} </td>
-          <td> {{ nodeType.ntname }} </td>       
+
+    <h4>Node types</h4>
+    <table class="table table-striped table-responsive">
+      <thead class="thead-dark">
+        <tr>
+          <th>nt</th>
+          <th>ntid</th>
+          <th>ntname</th>
         </tr>
-      </table>
-            
-    </div>
+      </thead>
+      <tr *ngFor="let nodeType of term.nodeTypes">
+        <td> {{ nodeType.nt }} </td>
+        <td> {{ nodeType.ntid }} </td>
+        <td> {{ nodeType.ntname }} </td>
+      </tr>
+    </table>
+
   </div>
