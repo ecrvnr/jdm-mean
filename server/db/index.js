@@ -148,5 +148,49 @@ module.exports = {
       }
       hasCallback(found);
     });
+  },
+
+  getRelations: function (category, eid, page, pageSize, dataRetrievedCallback) {
+    switch(category){
+      case 'out':
+      db.collection('outRels' + eid).find({}).skip(pageSize * (page - 1)).limit(pageSize).toArray(function(err, elements){
+        dataRetrievedCallback(elements);
+      });
+      break;
+      
+      case 'in':
+      db.collection('inRels' + eid).find({}).skip(pageSize * (page - 1)).limit(pageSize).toArray(function(err, elements){
+        dataRetrievedCallback(elements);
+      });
+      break;
+      
+      case 'entries':
+      db.collection('entries' + eid).find({}).skip(pageSize * (page - 1)).limit(pageSize).toArray(function(err, elements){
+        dataRetrievedCallback(elements);
+      });
+      break;
+    }
+  },
+
+  getAllRelations: function (category, eid, dataRetrievedCallback) {
+    switch(category){
+      case 'out':
+      db.collection('outRels' + eid).find({}).toArray(function(err, elements){
+        dataRetrievedCallback(elements);
+      });
+      break;
+      
+      case 'in':
+      db.collection('inRels' + eid).find({}).toArray(function(err, elements){
+        dataRetrievedCallback(elements);
+      });
+      break;
+      
+      case 'entries':
+      db.collection('entries' + eid).find({}).toArray(function(err, elements){
+        dataRetrievedCallback(elements);
+      });
+      break;
+    }
   }
 };
