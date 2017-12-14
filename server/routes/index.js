@@ -23,7 +23,7 @@ router.get('/terms', function (req, res) {
 });
 
 //out relations routes
-router.get('/out/:eid', function (req, res) {
+router.get('/terms/out/:eid', function (req, res) {
   var eid = req.params.eid;
   debug('Retrieving all out-relations for eid ' + eid);
   handler.getAllRelations(eid, function (data) {
@@ -31,7 +31,7 @@ router.get('/out/:eid', function (req, res) {
   });
 });
 
-router.get('/out/:eid/:page/:pageSize', function (req, res) {
+router.get('/terms/out/:eid/:page/:pageSize', function (req, res) {
   var eid = req.params.eid;
   var page = Number(req.params.page);
   var pageSize = Number(req.params.pageSize);
@@ -42,7 +42,7 @@ router.get('/out/:eid/:page/:pageSize', function (req, res) {
 });
 
 //in relations routes
-router.get('/in/:eid', function (req, res) {
+router.get('/terms/in/:eid', function (req, res) {
   var eid = req.params.eid;
   debug('Retrieving all in-relations for eid ' + eid);
   handler.getAllRelations("in", eid, function (data) {
@@ -50,7 +50,7 @@ router.get('/in/:eid', function (req, res) {
   });
 });
 
-router.get('/in/:eid/:page/:pageSize', function (req, res) {
+router.get('/terms/in/:eid/:page/:pageSize', function (req, res) {
   var eid = req.params.eid;
   var page = Number(req.params.page);
   var pageSize = Number(req.params.pageSize);
@@ -61,7 +61,7 @@ router.get('/in/:eid/:page/:pageSize', function (req, res) {
 });
 
 //entries routes
-router.get('/entries/:eid', function (req, res) {
+router.get('/terms/entries/:eid', function (req, res) {
   var eid = req.params.eid;
   debug('Retrieving all entries for eid ' + eid);
   handler.getAllRelations("entries", eid, function (data) {
@@ -69,7 +69,7 @@ router.get('/entries/:eid', function (req, res) {
   });
 });
 
-router.get('/entries/:eid/:page/:pageSize', function (req, res) {
+router.get('/terms/entries/:eid/:page/:pageSize', function (req, res) {
   var eid = req.params.eid;
   var page = Number(req.params.page);
   var pageSize = Number(req.params.pageSize);
