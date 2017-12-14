@@ -18,7 +18,6 @@ export class AppComponent {
   constructor(private termService: TermService) { }
 
   searchTerm() {
-    console.log(this.termString);
     this.term = null;
     this.loading = true;
     if (this.termString !== undefined) {
@@ -26,6 +25,7 @@ export class AppComponent {
         this.term = term;
         this.termString = null;
         this.loading = false;
+        console.log(this.term);
       });
     }
   }
