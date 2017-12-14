@@ -22,7 +22,11 @@ export class AppComponent {
     this.loading = true;
     if (this.termString !== undefined) {
       this.termService.getTerm(this.termString).then((term: Term) => {
-        this.term = term;
+        if (term !== {}) {
+          this.term = null;
+        } else {
+          this.term = term;
+        }
         this.termString = null;
         this.loading = false;
         console.log(this.term);

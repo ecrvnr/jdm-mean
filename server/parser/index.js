@@ -22,6 +22,11 @@ module.exports = {
     var code = $code.text();
     var def = $def.text();
 
+    if(code === ''){
+      fullDataInstantiatedCallback({});
+      return;
+    }
+
     var termObject = {};
     termObject['term'] = term;
     termObject['eid'] = Number(code.split('(eid=')[1].split(')')[0]);
@@ -150,12 +155,19 @@ module.exports = {
     var code = $code.text();
     var def = $def.text();
 
+    
+    if(code === ''){
+      termDataInstantiatedCallback({});
+      return;
+    }
+
     var termObject = {};
     termObject['term'] = term;
     termObject['eid'] = Number(code.split('(eid=')[1].split(')')[0]);
     termObject['def'] = [];
     termObject['relTypes'] = [];
     termObject['nodeTypes'] = [];
+
 
     var defArray = def.split(/\n[0-9]+. /);
     defArray.forEach(element => {
