@@ -1,49 +1,65 @@
-  <div *ngIf="term">
+<div *ngIf="term">
+  <br />
 
-    <h1 class="term-string">{{ term.term }}</h1>
+  <div>
+    <h1>{{ term.term }}</h1>
+    <h3>eid: {{ term.eid }}</h3>
+  </div>
+  <br />
 
+  <div *ngIf="term.def.size > 1" data-target="#def-list" data-toggle="collapse" data-group-id="parent" data-role="expander">
     <h4>Definitions</h4>
-    <ul class="list-group">
+    <a href="">Show</a>
+    <ul class="list-group" class="collapse" id="def-list" aria-expanded="true">
       <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
     </ul>
-    <br />
-
-    <h4>Relation types</h4>
-    <table class="table table-striped table-responsive">
-      <thead class="thead-dark">
-        <tr>
-          <th>rt</th>
-          <th>rtid</th>
-          <th>rtname</th>
-          <th>rtgpname</th>
-          <th>rthelp</th>
-        </tr>
-      </thead>
-      <tr *ngFor="let relType of term.relTypes">
-        <td> {{ relType.rt }} </td>
-        <td> {{ relType.rtid }} </td>
-        <td> {{ relType.rtname }} </td>
-        <td> {{ relType.rtgpname }} </td>
-        <td> {{ relType.rthelp }} </td>
-      </tr>
-    </table>
-    <br />
-
-
-    <h4>Node types</h4>
-    <table class="table table-striped table-responsive">
-      <thead class="thead-dark">
-        <tr>
-          <th>nt</th>
-          <th>ntid</th>
-          <th>ntname</th>
-        </tr>
-      </thead>
-      <tr *ngFor="let nodeType of term.nodeTypes">
-        <td> {{ nodeType.nt }} </td>
-        <td> {{ nodeType.ntid }} </td>
-        <td> {{ nodeType.ntname }} </td>
-      </tr>
-    </table>
-
   </div>
+  <br />
+
+  <div data-target="#rel-table" data-toggle="collapse" data-group-id="parent" data-role="expander">
+    <h4>Relation types</h4>
+    <a href="">Show</a>
+    <div class="table-responsive">
+      <table class="table table-striped collapse" id="rel-table" aria-expanded="true">
+        <thead class="thead-dark">
+          <tr>
+            <th>rt</th>
+            <th>rtid</th>
+            <th>rtname</th>
+            <th>rtgpname</th>
+            <th>rthelp</th>
+          </tr>
+        </thead>
+        <tr *ngFor="let relType of term.relTypes">
+          <td> {{ relType.rt }} </td>
+          <td> {{ relType.rtid }} </td>
+          <td> {{ relType.rtname }} </td>
+          <td> {{ relType.rtgpname }} </td>
+          <td> {{ relType.rthelp }} </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br />
+
+  <div data-target="#node-table" data-toggle="collapse" data-group-id="parent" data-role="expander">
+    <h4>Node types</h4>
+    <a href="">Show</a>
+    <div class="table-responsive">
+      <table class="table table-striped collapse" id="node-table" aria-expanded="true">
+        <thead class="thead-dark">
+          <tr>
+            <th>nt</th>
+            <th>ntid</th>
+            <th>ntname</th>
+          </tr>
+        </thead>
+        <tr *ngFor="let nodeType of term.nodeTypes">
+          <td> {{ nodeType.nt }} </td>
+          <td> {{ nodeType.ntid }} </td>
+          <td> {{ nodeType.ntname }} </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
