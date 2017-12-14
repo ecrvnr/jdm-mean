@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TermService } from '../term.service';
 import { Term } from '../term';
 import { OutRel } from '../outRel';
 import { InRel } from '../inRel';
 import { Entry } from '../entry';
-import { Input } from '@angular/core/src/metadata/directives';
 
 @Component({
   selector: 'app-term-collections',
