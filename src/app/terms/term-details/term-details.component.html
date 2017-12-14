@@ -7,20 +7,22 @@
   </div>
   <br />
 
-  <div *ngIf="term.def.size > 1" data-target="#def-list" data-toggle="collapse" data-group-id="parent" data-role="expander">
+  <div *ngIf="term.def.length > 0" data-target="#def-list-container" data-toggle="collapse" data-group-id="parent" data-role="expander">
     <h4>Definitions</h4>
-    <a href="">Show</a>
-    <ul class="list-group" class="collapse" id="def-list" aria-expanded="true">
-      <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
-    </ul>
+    <a href="">show/hide</a>
+    <div class="collapse" id="def-list-container" aria-expanded="true">
+      <ul class="list-group collapse" id="def-list" aria-expanded="true">
+        <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
+      </ul>
+    </div>
   </div>
   <br />
 
-  <div data-target="#rel-table" data-toggle="collapse" data-group-id="parent" data-role="expander">
+  <div data-target="#rel-table-container" data-toggle="collapse" data-group-id="parent" data-role="expander">
     <h4>Relation types</h4>
-    <a href="">Show</a>
-    <div class="table-responsive">
-      <table class="table table-striped collapse" id="rel-table" aria-expanded="true">
+    <a href="">show/hide</a>
+    <div class="table-responsive collapse" id="rel-table-container" aria-expanded="true">
+      <table class="table table-striped w-100 d-block d-md-table">
         <thead class="thead-dark">
           <tr>
             <th>rt</th>
@@ -42,11 +44,11 @@
   </div>
   <br />
 
-  <div data-target="#node-table" data-toggle="collapse" data-group-id="parent" data-role="expander">
+  <div data-target="#node-table-container" data-toggle="collapse" data-group-id="parent" data-role="expander">
     <h4>Node types</h4>
-    <a href="">Show</a>
-    <div class="table-responsive">
-      <table class="table table-striped collapse" id="node-table" aria-expanded="true">
+    <a href="">show/hide</a>
+    <div class="table-responsive collapse" id="node-table-container" aria-expanded="true">
+      <table class="table table-striped w-100 d-block d-md-table">
         <thead class="thead-dark">
           <tr>
             <th>nt</th>
