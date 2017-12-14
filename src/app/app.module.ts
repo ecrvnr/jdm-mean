@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TermDetailsComponent } from './terms/term-details/term-details.component';
+import { TermCollectionsComponent } from './terms/term-collections/term-collections.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TermDetailsComponent,
+    TermCollectionsComponent,
   ],
   imports: [
     HttpModule,
