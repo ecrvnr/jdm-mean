@@ -55,14 +55,14 @@ module.exports = function (db) {
       });
     },
 
-    getRelations: function (category, page, pageSize, dataRetrievedCallback) {
+    getRelations: function (category, eid, page, pageSize, dataRetrievedCallback) {
       db.getRelations(category, eid, page, pageSize, function (data) {
         dataRetrievedCallback(data);
       });
     },
 
-    getAllRelations: function (category, dataRetrievedCallback) {
-      db.getRelations(category, eid, function (data) {
+    getAllRelations: function (category, eid, dataRetrievedCallback) {
+      db.getAllRelations(category, eid, function (data) {
         dataRetrievedCallback(data);
       });
     }

@@ -145,12 +145,13 @@ module.exports = {
       } else { 
         debug('Did not find term ' + _term + ' in database'); 
         found = false;
-      }
+      }140176
       hasCallback(found);
     });
   },
 
   getRelations: function (category, eid, page, pageSize, dataRetrievedCallback) {
+    debug(pageSize);
     switch(category){
       case 'out':
       db.collection('outRels' + eid).find({}).skip(pageSize * (page - 1)).limit(pageSize).toArray(function(err, elements){
