@@ -42,7 +42,7 @@ module.exports = function (db) {
             termRetrievedCallback(termData);
           });
           parser.getFullData(term, function (fullData) {
-            if(fullData === null){
+            if(Object.keys(fullData).length !== 0){
               db.save(fullData);
             }
           });

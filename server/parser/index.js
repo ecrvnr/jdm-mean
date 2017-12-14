@@ -22,7 +22,7 @@ module.exports = {
     var code = $code.text();
     var def = $def.text();
 
-    if(code === ''){
+    if(Object.keys(code).length === 0){
       fullDataInstantiatedCallback({});
       return;
     }
@@ -156,7 +156,7 @@ module.exports = {
     var def = $def.text();
 
     
-    if(code === ''){
+    if(Object.keys(code).length === 0){
       termDataInstantiatedCallback({});
       return;
     }
