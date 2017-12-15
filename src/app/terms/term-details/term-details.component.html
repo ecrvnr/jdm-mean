@@ -29,50 +29,11 @@
   </div>
   <br />
 
-  <div data-target="#rel-table-container" data-toggle="collapse" data-group-id="parent" data-role="expander">
-    <h4>Relation types</h4>
-    <a href="">show/hide</a>
-    <div class="table-responsive collapse" id="rel-table-container" aria-expanded="true">
-      <table class="table table-striped w-100 d-block d-md-table">
-        <thead class="thead-dark">
-          <tr>
-            <th>rt</th>
-            <th>rtid</th>
-            <th>rtname</th>
-            <th>rtgpname</th>
-            <th>rthelp</th>
-          </tr>
-        </thead>
-        <tr *ngFor="let relType of term.relTypes">
-          <td> {{ relType.rt }} </td>
-          <td> {{ relType.rtid }} </td>
-          <td> {{ relType.rtname }} </td>
-          <td> {{ relType.rtgpname }} </td>
-          <td> {{ relType.rthelp }} </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <br />
-
-  <div data-target="#node-table-container" data-toggle="collapse" data-group-id="parent" data-role="expander">
-    <h4>Node types</h4>
-    <a href="">show/hide</a>
-    <div class="table-responsive collapse" id="node-table-container" aria-expanded="true">
-      <table class="table table-striped w-100 d-block d-md-table">
-        <thead class="thead-dark">
-          <tr>
-            <th>nt</th>
-            <th>ntid</th>
-            <th>ntname</th>
-          </tr>
-        </thead>
-        <tr *ngFor="let nodeType of term.nodeTypes">
-          <td> {{ nodeType.nt }} </td>
-          <td> {{ nodeType.ntid }} </td>
-          <td> {{ nodeType.ntname }} </td>
-        </tr>
-      </table>
+  <div>
+    <h4>Details</h4>
+    <div class="btn-group btn-group-justified">
+      <button type="button" class="btn btn-outline-secondary">Node types</button>
+      <button type="button" class="btn btn-outline-secondary">Relation types</button>
     </div>
   </div>
   <br />
