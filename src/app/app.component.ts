@@ -11,26 +11,12 @@ import { TermService } from './terms/term.service';
 export class AppComponent {
   title = 'app';
 
+  placeHolderString: String;
   termString: String;
-  term: Term;
-  loading: Boolean;
 
   constructor(private termService: TermService) { }
 
-  searchTerm() {
-    this.term = null;
-    this.loading = true;
-    if (this.termString !== undefined) {
-      this.termService.getTerm(this.termString).then((term: Term) => {
-        if (Object.keys(term).length === 0) {
-          this.term = null;
-        } else {
-          this.term = term;
-        }
-        this.termString = null;
-        this.loading = false;
-        console.log(this.term);
-      });
-    }
+  search() {
+    this.termString = this.placeHolderString;
   }
 }

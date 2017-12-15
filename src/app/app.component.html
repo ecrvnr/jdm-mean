@@ -5,16 +5,15 @@
     </a>
   </div>
 
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto ml-auto">
       <li class="nav-item">
         <div class="justify-content-md-center">
-          <form novalidate (ngSubmit)="searchTerm()" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" name="term" [(ngModel)]="termString" placeholder="Search term..." aria-label="Search"
-              style="width: 600px;">
+          <form novalidate (ngSubmit)="search()" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" name="term" [(ngModel)]="placeHolderString" placeholder="Search term..."
+              aria-label="Search" style="width: 600px;">
 
-            <button class="btn btn-outline-primary" type="button" (click)="searchTerm()">
+            <button class="btn btn-outline-primary" type="button" (click)="search()">
               Search
             </button>
           </form>
@@ -29,20 +28,7 @@
   </button>
 </nav>
 
-
-<div class="sk-cube-grid" *ngIf="loading">
-  <div class="sk-cube sk-cube1"></div>
-  <div class="sk-cube sk-cube2"></div>
-  <div class="sk-cube sk-cube3"></div>
-  <div class="sk-cube sk-cube4"></div>
-  <div class="sk-cube sk-cube5"></div>
-  <div class="sk-cube sk-cube6"></div>
-  <div class="sk-cube sk-cube7"></div>
-  <div class="sk-cube sk-cube8"></div>
-  <div class="sk-cube sk-cube9"></div>
-</div>
-
 <div class="container">
   <!--The content below is only a placeholder and can be replaced.-->
-  <app-term-details [term]="term"></app-term-details>
+  <app-term-details [termString]="termString"></app-term-details>
 </div>
