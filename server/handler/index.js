@@ -11,7 +11,7 @@ module.exports = function (db) {
     db.getAllTerms(function (terms) {
       terms.forEach(element => {
         debug('Updating term: ' + element['term']);
-        parser.getData(element['term'], function (data) {
+        parser.getData(element, function (data) {
           db.save(data);
         });
       });
@@ -47,25 +47,6 @@ module.exports = function (db) {
             }
           });
         }
-      });
-    },
-
-
-    getAllTerms: function (termsRetrievedCallback) {
-      db.getAllTerms(function (terms) {
-        termsRetrievedCallback(terms);
-      });
-    },
-
-    getRelations: function (category, eid, page, pageSize, dataRetrievedCallback) {
-      db.getRelations(category, eid, page, pageSize, function (data) {
-        dataRetrievedCallback(data);
-      });
-    },
-
-    getAllRelations: function (category, eid, dataRetrievedCallback) {
-      db.getAllRelations(category, eid, function (data) {
-        dataRetrievedCallback(data);
       });
     }
   }
