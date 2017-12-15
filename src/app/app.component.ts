@@ -17,6 +17,9 @@ export class AppComponent {
   constructor(private termService: TermService) { }
 
   search() {
-    this.termString = this.placeHolderString;
+    if (this.placeHolderString.length > 0) {
+      this.termString = null;
+      this.termString = this.placeHolderString;
+    }
   }
 }
