@@ -18,7 +18,7 @@
   </div>
   <br />
 
-  <div>
+  <div *ngIf="term.def.length > 0">
     <h4>Definitions</h4>
     <div *ngIf="term.def.length > 0" data-target="#def-list-container" data-toggle="collapse" data-group-id="parent" data-role="expander">      
       <button class="btn btn-primary" type="button">show/hide</button>
