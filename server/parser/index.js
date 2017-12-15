@@ -37,7 +37,7 @@ module.exports = {
 
     var defArray = def.split(/\n[0-9]+. /);
     defArray.forEach(element => {
-      if ((/\n*/.test(element))) {
+      if (!(/^\n*$/.test(element))) {
         termObject['def'].push(element);
       }
     });
