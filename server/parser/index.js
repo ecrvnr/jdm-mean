@@ -12,139 +12,6 @@ module.exports = {
   /**
    * Parse the code to fill up our data structure
    */
-  parseFull: function (term, body, fullDataInstantiatedCallback) {
-    debug('Parsing html');
-    var $ = cheerio.load(body);
-
-    var $code = $('CODE');
-    var $def = $('def');
-
-    var code = $code.text();
-    var def = $def.text();
-
-    if(Object.keys(code).length === 0){
-      fullDataInstantiatedCallback({});
-      return;
-    }
-
-    var termObject = {};
-    termObject['term'] = term;
-    termObject['eid'] = Number(code.split('(eid=')[1].split(')')[0]);
-    termObject['def'] = [];
-    termObject['relTypes'] = [];
-    termObject['nodeTypes'] = [];
-
-    var dataObject = {};
-    dataObject['term'] = termObject;
-    dataObject['entries'] = [];
-    dataObject['outRels'] = [];
-    dataObject['inRels'] = [];
-
-    var defArray = def.split(/\n[0-9]+. /);
-    defArray.forEach(element => {
-      if (element != '' && element != '\n') {
-        termObject['def'].push(element);
-        //debug(element);                 
-      }
-    });
-
-    var lines = code.split('\n');
-    var lineType;
-    lines.forEach(element => {
-      if (element.indexOf('Nodes Types') != -1) {
-        lineType = 'nodeType';
-      } else if (element.indexOf('Entries') != -1) {
-        lineType = 'entry';
-      } else if (element.indexOf('Relation Types') != -1) {
-        lineType = 'relType';
-      } else if (element.indexOf('relations sortantes') != -1) {
-        lineType = 'outRel';
-      } else if (element.indexOf('relations entrantes') != -1) {
-        lineType = 'inRel';
-      } else if (element.length > 4) {
-        var fields;
-        switch (lineType) {
-          case 'nodeType':
-            var nodeTypeObject = {};
-            fields = element.split(';');
-            nodeTypeObject['nt'] = fields[0];
-            nodeTypeObject['ntid'] = Number(fields[1]);
-            nodeTypeObject['ntname'] = fields[2].split('\'')[1];
-            termObject['nodeTypes'].push(nodeTypeObject);
-            //debug(nodeTypeObject);
-            break;
-
-          case 'entry':
-            var entryObject = {};
-            fields = element.split(';');
-            entryObject['e'] = fields[0];
-            entryObject['eid'] = Number(fields[1]);
-            entryObject['name'] = fields[2].split('\'')[1];
-            entryObject['type'] = Number(fields[3]);
-            entryObject['w'] = Number(fields[4]);
-            entryObject['formatted_name'] = fields[5];
-            if (entryObject['formatted_name'] != undefined) {
-              entryObject['formatted_name'] = entryObject['formatted_name'].split('\'')[1];
-            }
-            dataObject['entries'].push(entryObject);
-            //debug(entryObject);            
-            break;
-
-          case 'relType':
-            var relTypeObject = {};
-            fields = element.split(';');
-            relTypeObject['rt'] = fields[0];
-            relTypeObject['rtid'] = Number(fields[1]);
-            relTypeObject['rtname'] = fields[2].split('\'')[1];
-            relTypeObject['rtgpname'] = fields[3].split('\'')[1];
-            relTypeObject['rthelp'] = fields[4];
-            termObject['relTypes'].push(relTypeObject);
-            //debug(relTypeObject);            
-            break;
-
-          case 'outRel':
-            var outRelObject = {};
-            fields = element.split(';');
-            outRelObject['r'] = fields[0];
-            outRelObject['rid'] = Number(fields[1]);
-            outRelObject['node1'] = Number(fields[2]);
-            outRelObject['node2'] = Number(fields[3]);
-            outRelObject['type'] = Number(fields[4]);
-            outRelObject['w'] = Number(fields[5]);
-            dataObject['outRels'].push(outRelObject);
-            //debug(outRelObject);            
-            break;
-
-          case 'inRel':
-            var inRelObject = {};
-            fields = element.split(';');
-            inRelObject['r'] = fields[0];
-            inRelObject['rid'] = Number(fields[1]);
-            inRelObject['node1'] = Number(fields[2]);
-            inRelObject['node2'] = Number(fields[3]);
-            inRelObject['type'] = Number(fields[4]);
-            inRelObject['w'] = Number(fields[5]);
-            dataObject['inRels'].push(inRelObject);
-            //debug('parser', inRelObject);            
-            break;
-
-          default:
-            break;
-        }
-      }
-    });
-
-    debug('Term JSON Object created');
-    Promise.all(termObject['def'].map(function (element, index) {
-      if (/\n*/.test(element)) {
-        termObject['def'].splice(index, 1);
-      }
-    })).then(function () {
-      fullDataInstantiatedCallback(dataObject);
-    })
-  },
-
-
   parseTerm: function (term, body, termDataInstantiatedCallback) {
     debug('Parsing html');
     var $ = cheerio.load(body);
@@ -155,74 +22,99 @@ module.exports = {
     var code = $code.text();
     var def = $def.text();
 
-    
-    if(Object.keys(code).length === 0){
-      termDataInstantiatedCallback({});
+    if (code.length === 0) {
+      termDataInstantiatedCallback(null, false);
       return;
     }
 
-    var termObject = {};
-    termObject['term'] = term;
-    termObject['eid'] = Number(code.split('(eid=')[1].split(')')[0]);
-    termObject['def'] = [];
-    termObject['relTypes'] = [];
-    termObject['nodeTypes'] = [];
-
+    var termObject = {
+      term: term,
+      eid: Number(code.split('(eid=')[1].split(')')[0]),
+      def: [],
+      nodes: [],
+      relations: []
+    };
 
     var defArray = def.split(/\n[0-9]+. /);
     defArray.forEach(element => {
-      if (element != '' && element != '\n') {
+      if ((/\n*/.test(element))) {
         termObject['def'].push(element);
-        //debug(element);                 
       }
     });
+
+    debug('Partial term data instantiated');
+    termDataInstantiatedCallback(termObject, false);
 
     var lines = code.split('\n');
-    var lineType;
-    lines.forEach(element => {
-      if (element.indexOf('Nodes Types') != -1) {
-        lineType = 'nodeType';
-      } else if (element.indexOf('Entries') != -1) {
-        lineType = 'entry';
-      } else if (element.indexOf('Relation Types') != -1) {
-        lineType = 'relType';
-      } else if (element.indexOf('relations sortantes') != -1) {
-        lineType = 'outRel';
-      } else if (element.indexOf('relations entrantes') != -1) {
-        lineType = 'inRel';
-      } else if (element.length > 4) {
-        var fields;
-        switch (lineType) {
-          case 'nodeType':
-            var nodeTypeObject = {};
-            fields = element.split(';');
-            nodeTypeObject['nt'] = fields[0];
-            nodeTypeObject['ntid'] = Number(fields[1]);
-            nodeTypeObject['ntname'] = fields[2].split('\'')[1];
-            termObject['nodeTypes'].push(nodeTypeObject);
-            //debug(nodeTypeObject);
-            break;
+    Promise.all(lines.map((element, index) => {
+      var elements = element.split(';');
 
-          case 'relType':
-            var relTypeObject = {};
-            fields = element.split(';');
-            relTypeObject['rt'] = fields[0];
-            relTypeObject['rtid'] = Number(fields[1]);
-            relTypeObject['rtname'] = fields[2].split('\'')[1];
-            relTypeObject['rtgpname'] = fields[3].split('\'')[1];
-            relTypeObject['rthelp'] = fields[4];
-            termObject['relTypes'].push(relTypeObject);
-            //debug(relTypeObject);            
-            break;
-
-          default:
-            break;
+      if (/^nt;[0-9]+/.test(element)) { //node type
+        var nodeType = {
+          nt: elements[0],
+          ntid: elements[1],
+          nt_name: elements[2]
         }
-      }
-    });
+        termObject.nodes.push(nodeType);
 
-    debug('Term JSON Object created');
-    termDataInstantiatedCallback(termObject);
+      } else if (/^e;/.test(element)) { //entry
+        termObject['nodes'].map((node, index) => {
+          if (node.ntid == elements[3]) {
+            node['entries'] = (node['entries'] === undefined) ? node['entries'] = [] : node['entries'] = node['entries'];
+            node['entries'].push({
+              e: elements[0],
+              eid: elements[1],
+              name: elements[2],
+              type: elements[3],
+              w: elements[4],
+              formatted_name: (elements.length === 6) ? elements[5] : ''
+            });
+          }
+        });
+
+      } else if (/^rt;/.test(element)) { //relation type
+        termObject['relations'].push({
+          rt: elements[0],
+          rtid: elements[1],
+          rtname: elements[2],
+          rtgpname: elements[3],
+          rthelp: (elements.length === 5) ? elements[4] : ''
+        });
+
+      } else if (new RegExp("^r;[0-9]+;" + termObject['eid']).test(element)) { //outgoing relation
+        termObject['relations'].map((relation, index) => {
+          if (relation.rtid == elements[4]) {
+            relation['outRels'] = (relation['outRels'] === undefined) ? relation['outRels'] = [] : relation['outRels'] = relation['outRels'];
+            relation['outRels'].push({
+              r: elements[0],
+              rid: elements[1],
+              node1: elements[2],
+              node2: elements[3],
+              type: elements[4],
+              w: elements[5]
+            });
+          }
+        });
+
+      } else if (new RegExp("^r;[0-9]+;[0-9]+;" + termObject['eid']).test(element)) { //incoming relation
+        termObject['relations'].map((relation, index) => {
+          if (relation.rtid == elements[4]) {
+            relation['inRels'] = (relation['inRels'] === undefined) ? relation['inRels'] = [] : relation['inRels'] = relation['inRels'];
+            relation['inRels'].push({
+              r: elements[0],
+              rid: elements[1],
+              node1: elements[2],
+              node2: elements[3],
+              type: elements[4],
+              w: elements[5]
+            });
+          }
+        });
+      }
+    })).then(function () {
+      debug('Full term data instantiated');      
+      termDataInstantiatedCallback(termObject, true);
+    });
   },
 
   /**
@@ -246,12 +138,6 @@ module.exports = {
   /**
    * Get the term data from a term and relation type
    */
-  getFullData: function (term, fullDataInstantiatedCallback) {
-    module.exports.fetchHTML(term, function (term, code) {
-      module.exports.parseFull(term, code, fullDataInstantiatedCallback);
-    });
-  },
-
   getTermData: function (term, termDataInstantiatedCallback) {
     module.exports.fetchHTML(term, function (term, code) {
       module.exports.parseTerm(term, code, termDataInstantiatedCallback);

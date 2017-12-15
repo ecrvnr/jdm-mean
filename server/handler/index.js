@@ -29,21 +29,21 @@ module.exports = function (db) {
       //If the term data is in the database, load it from there
       db.has(term, function (has) {
         if (has) {
-          db.getTermData(term, function (termData) {
-            termObject = termData;
+          db.getTermData(term, function(termData) {
             termRetrievedCallback(termData);
-            parser.getFullData(termData['term'], function (fullData) {
-              db.save(fullData);
+            parser.getTermData(termData.term, function (termData, complete) {
+              if (complete) {
+                db.save(termData);              
+              }
             });
           });
           //Else fetch it from RezoDump
         } else {
-          parser.getTermData(term, function (termData) {
-            termRetrievedCallback(termData);
-          });
-          parser.getFullData(term, function (fullData) {
-            if(Object.keys(fullData).length !== 0){
-              db.save(fullData);
+          parser.getTermData(term, function (termData, complete) {
+            if (complete) {
+              db.save(termData);              
+            } else {
+              termRetrievedCallback(termData);
             }
           });
         }
