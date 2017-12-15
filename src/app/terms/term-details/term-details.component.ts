@@ -13,7 +13,9 @@ export class TermDetailsComponent implements OnInit {
 
   @Input()
   set termString(termString: String) {
-    this.searchTerm(termString);
+    if  (termString !== undefined && termString.length > 0) {
+      this.searchTerm(termString);
+    }
   }
 
   term: Term;
@@ -28,16 +30,14 @@ export class TermDetailsComponent implements OnInit {
   searchTerm(string: String) {
     this.term = null;
     this.loading = true;
-    if (string.length > 0) {
-      this.termService.getTerm(string).then((term: Term) => {
-        if (term === null) {
-          this.term = null;
-        } else {
-          this.term = term;
-        }
-        this.loading = false;
-        console.log(this.term);
-      });
-    }
+    this.termService.getTerm(string).then((term: Term) => {
+      if (term === null) {
+        this.term = null;
+      } else {
+        this.term = term;
+      }
+      this.loading = false;
+      console.log(this.term);
+    });
   }
 }

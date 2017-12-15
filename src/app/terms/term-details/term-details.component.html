@@ -18,22 +18,29 @@
   </div>
   <br />
 
-  <div *ngIf="term.def.length > 0" data-target="#def-list-container" data-toggle="collapse" data-group-id="parent" data-role="expander">
+  <div>
     <h4>Definitions</h4>
-    <a href="">show/hide</a>
-    <div class="collapse" id="def-list-container" aria-expanded="true">
+    <div *ngIf="term.def.length > 0" data-target="#def-list-container" data-toggle="collapse" data-group-id="parent" data-role="expander">      
+      <button class="btn btn-primary" type="button">show/hide</button>
+    </div>
+    <br />
+    <div class="collapse" id="def-list-container" aria-expanded="false">
       <ul class="list-group collapse" id="def-list" aria-expanded="true">
         <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
       </ul>
+      <br />
     </div>
   </div>
-  <br />
 
   <div>
     <h4>Details</h4>
-    <div class="btn-group btn-group-justified">
-      <button type="button" class="btn btn-outline-secondary">Node types</button>
-      <button type="button" class="btn btn-outline-secondary">Relation types</button>
+    <div class="btn-group btn-group-justified" data-toggle="buttons">
+      <label class="btn btn-primary active">
+        <input type="radio" name="node-types" id="toggle-node-types" autocomplete="off">Node types
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="rel-types" id="toggle-rel-types" autocomplete="off">Relation types
+      </label>
     </div>
   </div>
   <br />
