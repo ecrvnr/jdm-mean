@@ -13,7 +13,7 @@ export class TermDetailsComponent implements OnInit {
 
   @Input()
   set termString(termString: String) {
-    if  (termString !== undefined && termString.length > 0) {
+    if (termString !== undefined && termString.length > 0) {
       this.searchTerm(termString);
     }
   }
