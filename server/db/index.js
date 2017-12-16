@@ -17,7 +17,7 @@ module.exports = {
 
   getTermData: function (_term, termDataRetrievedCallback) {
     debug('Getting term ' + _term + ' from database');
-    db.collection('terms').findOne({ term: _term }, { fields: { nodes: 0, relations: 0 } }, function (err, res) {
+    db.collection('terms').findOne({ term: _term }, { fields: { 'nodes.entries': 0, 'relations.outRels': 0, 'relations.inRels': 0 } }, function (err, res) {
       assert(err === null);
       termDataRetrievedCallback(res);
       debug('Retrieved term ' + _term + ' from database');
@@ -64,6 +64,7 @@ module.exports = {
   getNodes: function (_eid, nodesRetrievedCallback) {
     debug('Getting nodes for eid ' + _eid + ' in database');
     db.collection('terms').findOne({ eid: _eid }, { fields: { _id: 0, term: 0, eid: 0, def: 0, 'nodes.entries': 0, relations: 0 } }, function (err, res) {
+      debug(err);
       assert(err === null);
       nodesRetrievedCallback(res['nodes']);
       debug(res);
