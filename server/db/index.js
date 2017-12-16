@@ -39,13 +39,11 @@ module.exports = {
 
   getTermData: function (_term, termDataRetrievedCallback) {
     debug('Getting term ' + _term + ' from database');
-
     db.collection('terms').findOne({ term: _term }, {fields: {nodes: 0, relations: 0}}, function(err, res){
       assert(err === null); 
       termDataRetrievedCallback(res);
       debug('Retrieved term ' + _term + ' from database');
     });
-    
   },
 
   has: function (_term, hasCallback) {
