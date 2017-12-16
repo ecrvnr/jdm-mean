@@ -42,9 +42,6 @@ module.exports = {
       }
     });
 
-    debug('Partial term data instantiated');
-    termDataInstantiatedCallback(termObject, false);
-
     var lines = code.split('\n');
     Promise.all(lines.map((element, index) => {
       var elements = element.split(';');
@@ -53,7 +50,7 @@ module.exports = {
         var nodeType = {
           nt: elements[0],
           ntid: elements[1],
-          nt_name: elements[2]
+          ntname: elements[2]
         }
         termObject.nodes.push(nodeType);
 
@@ -82,6 +79,7 @@ module.exports = {
         });
 
       } else if (new RegExp("^r;[0-9]+;" + termObject['eid']).test(element)) { //outgoing relation
+        
         termObject['relations'].map((relation, index) => {
           if (relation.rtid == elements[4]) {
             relation['outRels'] = (relation['outRels'] === undefined) ? relation['outRels'] = [] : relation['outRels'] = relation['outRels'];
@@ -112,7 +110,13 @@ module.exports = {
         });
       }
     })).then(function () {
-      debug('Full term data instantiated');      
+      debug('Partial term data instantiated');
+      var partialTermObject = termObject;
+      Promise.all(partialTermObject['nodes'].map(node => {
+        delete node['entries'];
+      })).then(termDataInstantiatedCallback(partialTermObject, false));
+      
+      debug('Full term data instantiated');
       termDataInstantiatedCallback(termObject, true);
     });
   },
