@@ -12,6 +12,42 @@
         <input type="radio" name="collections-options" id="option2" autocomplete="off"> Incoming relations
       </label>
     </div>
+    <div style="float: right;">
+      <button class="btn btn-outline-primary btn-sm" type="button" data-target="#collections-table-container" data-toggle="collapse"
+        data-group-id="parent" data-role="expander">show/hide</button>
+    </div>
   </div>
   <br />
+
+  <div class="table-responsive">
+    <div class="collapse" id="collections-table-container" aria-expanded="false">
+      <table class="table table-striped table-hover">
+        <thead class="thead thead-dark">
+          <tr>
+            <th>rt</th>
+            <th>rtid</th>
+            <th>rtname</th>
+            <th>rtgpname</th>
+            <th>rthelp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button type="button" id="pagesize-dropdown" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="true">
+      Page size
+    </button>
+    <div class="dropdown-menu" aria-labelledby="pagesize-dropdown">
+      <a class="dropdown-item" href="#">10</a>
+      <a class="dropdown-item" href="#">25</a>
+      <a class="dropdown-item" href="#">50</a>
+      <a class="dropdown-item" href="#">100</a>
+    </div>
+  </div>
 </div>
