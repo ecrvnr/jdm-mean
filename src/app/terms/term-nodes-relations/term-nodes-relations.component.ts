@@ -24,7 +24,9 @@ export class TermNodesRelationsComponent implements OnInit {
 
   constructor(private termService: TermService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.toShow = 'nodes';
+  }
 
   show(toShow: String): void {
     this.toShow = toShow;
