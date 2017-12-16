@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Term } from '../term';
 import { TermService } from '../term.service';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-term-details',
@@ -23,21 +23,22 @@ export class TermDetailsComponent implements OnInit {
 
   constructor(private termService: TermService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loading = false;
   }
 
-  searchTerm(string: String) {
+  searchTerm(string: String): void {
     this.term = null;
     this.loading = true;
-    this.termService.getTerm(string).then((term: Term) => {
-      if (term === null) {
-        this.term = null;
-      } else {
-        this.term = term;
-      }
-      this.loading = false;
-      console.log(this.term);
-    });
+    this.termService.getTerm(string)
+      .then((term: Term) => {
+        if (term === null) {
+          this.term = null;
+        } else {
+          this.term = term;
+        }
+        this.loading = false;
+        console.log(this.term);
+      });
   }
 }

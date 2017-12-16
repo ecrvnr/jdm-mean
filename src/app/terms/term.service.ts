@@ -4,6 +4,8 @@ import { Term } from './term';
 import { OutRel } from './outRel';
 import { InRel } from './inRel';
 import { Entry } from './entry';
+import { Node } from './node';
+import { Relation } from './relation';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -19,7 +21,30 @@ export class TermService {
       .catch(this.handleError);
   }
 
-  // get("/api/terms/")
+  // get("/api/terms/nodes/:eid")
+  getNodes(eid: Number): Promise<void | Node[]> {
+    return this.http.get(this.termsUrl + '/nodes/' + eid)
+      .toPromise()
+      .then(response => response.json() as Node[])
+      .catch(this.handleError);
+  }
+
+  // get("/api/terms/relations/:eid")
+  getRelations(eid: Number): Promise<void | Relation[]> {
+    return this.http.get(this.termsUrl + '/relations/' + eid)
+      .toPromise()
+      .then(response => response.json() as Relation[])
+      .catch(this.handleError);
+  }
+
+
+
+
+
+
+
+
+  // get("/api/terms")
   getAllTerms(): Promise<void | Term[]> {
     return this.http.get(this.termsUrl)
       .toPromise()

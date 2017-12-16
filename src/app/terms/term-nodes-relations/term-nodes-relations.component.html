@@ -1,0 +1,56 @@
+<div>
+  <div>
+    <h4>Details</h4>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary" (click)="show('nodes')">
+        <input type="radio" name="nodes-relations-options" id="option1" autocomplete="off"> Node types
+      </label>
+      <label class="btn btn-primary" data-toggle="button" (click)="show('relations')">
+        <input type="radio" name="nodes-relations-options" id="option2" autocomplete="off"> Relation types
+      </label>
+    </div>
+  </div>
+  <br />
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover" *ngIf="toShow == 'nodes'">
+      <thead class="thead thead-inverse">
+        <tr>
+          <th>nt</th>
+          <th>ntid</th>
+          <th>ntname</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let node of term.nodes">
+          <td> {{node.nt}} </td>
+          <td> {{node.ntid}} </td>
+          <td> {{node.ntname}} </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-striped table-hover" *ngIf="toShow == 'relations'">
+      <thead class="thead thead-inverse">
+        <tr>
+          <th>rt</th>
+          <th>rtid</th>
+          <th>rtname</th>
+          <th>rtgpname</th>
+          <th>rthelp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let relation of term.relations">
+          <td> {{relation.rt}} </td>
+          <td> {{relation.rtid}} </td>
+          <td> {{relation.rtname}} </td>
+          <td> {{relation.rtgpname}} </td>
+          <td> {{relation.rthelp}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-term-collections></app-term-collections>

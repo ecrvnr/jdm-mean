@@ -49,4 +49,8 @@ export class TermCollectionsComponent {
       this.loading = false;
     });
   }
+
+  test(): void {
+    console.log('POUET');
+  }
 }

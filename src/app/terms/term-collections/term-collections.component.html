@@ -1,14 +1,17 @@
 <div>
-  <h4>Additional data</h4>
-  <div class="btn-group btn-group-justified" data-toggle="buttons">
-    <label class="btn btn-primary active">
-      <input type="radio" name="entries" id="toggle-entries" autocomplete="off">Entries
-    </label>
-    <label class="btn btn-primary">
-      <input type="radio" name="out-rels" id="toggle-out-rels" autocomplete="off">Outgoing Relations
-    </label>
-    <label class="btn btn-primary">
-      <input type="radio" name="in-rels" id="toggle-in-rels" autocomplete="off">Incoming Relations
-    </label>
+  <div>
+    <h4>Details</h4>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary active" (click)="test()">
+        <input type="radio" name="collections-options" id="option1" autocomplete="off"> Entries
+      </label>
+      <label class="btn btn-primary" data-toggle="button" (click)="test()">
+        <input type="radio" name="collections-options" id="option2" autocomplete="off"> Outgoing relations
+      </label>
+      <label class="btn btn-primary" data-toggle="button" (click)="test()">
+        <input type="radio" name="collections-options" id="option2" autocomplete="off"> Incoming relations
+      </label>
+    </div>
   </div>
+  <br />
 </div>

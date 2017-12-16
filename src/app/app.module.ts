@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TermDetailsComponent } from './terms/term-details/term-details.component';
 import { TermCollectionsComponent } from './terms/term-collections/term-collections.component';
+import { TermNodesRelationsComponent } from './terms/term-nodes-relations/term-nodes-relations.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { TermCollectionsComponent } from './terms/term-collections/term-collecti
     AppComponent,
     TermDetailsComponent,
     TermCollectionsComponent,
+    TermNodesRelationsComponent,
   ],
   imports: [
     HttpModule,
