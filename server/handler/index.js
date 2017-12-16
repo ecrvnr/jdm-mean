@@ -29,11 +29,11 @@ module.exports = function (db) {
       //If the term data is in the database, load it from there
       db.has(term, function (has) {
         if (has) {
-          db.getTermData(term, function(termData) {
+          db.getTermData(term, function (termData) {
             termRetrievedCallback(termData);
             parser.getTermData(termData.term, function (termData, complete) {
               if (complete) {
-                db.save(termData);              
+                db.save(termData);
               }
             });
           });
@@ -41,13 +41,25 @@ module.exports = function (db) {
         } else {
           parser.getTermData(term, function (termData, complete) {
             if (complete) {
-              db.save(termData);              
+              db.save(termData);
             } else {
               termRetrievedCallback(termData);
             }
           });
         }
       });
+    },
+
+    getNodes: function (eid, nodesRetrievedCallback) {
+      db.getNodes(eid, function (data) {
+        nodesRetrievedCallback(data);
+      })
+    },
+
+    getRelations: function (eid, relationsRetrievedCallback) {
+      db.getRelations(eid, function (data) {
+        relationsRetrievedCallback(data);
+      })
     }
   }
 }

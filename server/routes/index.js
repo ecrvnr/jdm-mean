@@ -9,7 +9,7 @@ debug('Intializing routes');
 //terms routes
 router.get('/terms/:term', function (req, res) {
   var term = req.params.term.toLowerCase();
-  debug('Looking for ' + term);
+  debug('Retrieving term ' + term);
   handler.getTerm(term, function (termData) {
     res.json(termData);
   })
@@ -21,5 +21,23 @@ router.get('/terms', function (req, res) {
     res.json(data);
   });
 });
+
+
+router.get('/terms/nodes/:eid', function (req, res) {
+  var eid = Number(req.params.eid);
+  debug('Retrieving nodes for eid ' + eid);
+  handler.getNodes(eid, function (data) {
+    res.json(data);
+  });
+});
+
+router.get('/terms/relations/:eid', function (req, res) {
+  var eid = Number(req.params.eid);
+  debug('Retrieving relations for eid ' + eid);
+  handler.getRelations(eid, function (data) {
+    res.json(data);
+  });
+});
+
 
 module.exports = router;

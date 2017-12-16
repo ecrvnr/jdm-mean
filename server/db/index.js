@@ -15,6 +15,15 @@ mongoClient.connect(url, function (err, client) {
 
 module.exports = {
 
+  getTermData: function (_term, termDataRetrievedCallback) {
+    debug('Getting term ' + _term + ' from database');
+    db.collection('terms').findOne({ term: _term }, { fields: { nodes: 0, relations: 0 } }, function (err, res) {
+      assert(err === null);
+      termDataRetrievedCallback(res);
+      debug('Retrieved term ' + _term + ' from database');
+    });
+  },
+
   getAllTerms: function (listRetrievedCallback) {
     debug('Retrieving all terms from database');
     terms = [];
@@ -37,15 +46,6 @@ module.exports = {
     });
   },
 
-  getTermData: function (_term, termDataRetrievedCallback) {
-    debug('Getting term ' + _term + ' from database');
-    db.collection('terms').findOne({ term: _term }, {fields: {nodes: 0, relations: 0}}, function(err, res){
-      assert(err === null); 
-      termDataRetrievedCallback(res);
-      debug('Retrieved term ' + _term + ' from database');
-    });
-  },
-
   has: function (_term, hasCallback) {
     var found;
     db.collection('terms').count({ term: _term }, function (err, res) {
@@ -60,4 +60,23 @@ module.exports = {
       hasCallback(found);
     });
   },
+
+  getNodes: function (_eid, nodesRetrievedCallback) {
+    debug('Getting nodes for eid ' + _eid + ' in database');
+    db.collection('terms').findOne({ eid: _eid }, { fields: { _id: 0, term: 0, eid: 0, def: 0, 'nodes.entries': 0, relations: 0 } }, function (err, res) {
+      assert(err === null);
+      nodesRetrievedCallback(res['nodes']);
+      debug(res);
+    })
+  },
+
+  getRelations: function (_eid, relationsRetrievedCallback) {
+    debug('Getting relations for eid ' + _eid + ' in database');
+    db.collection('terms').findOne({ eid: _eid }, { fields: { _id: 0, term: 0, eid: 0, def: 0, nodes: 0, 'relations.outRels': 0, 'relations.inRels': 0 } }, function (err, res) {
+      debug(err);
+      assert(err === null);
+      relationsRetrievedCallback(res['relations']);
+      debug(res);
+    })
+  }
 };
