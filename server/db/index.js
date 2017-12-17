@@ -64,7 +64,6 @@ module.exports = {
   getNodes: function (_eid, nodesRetrievedCallback) {
     debug('Getting nodes for eid ' + _eid + ' in database');
     db.collection('terms').findOne({ eid: _eid }, { fields: { _id: 0, term: 0, eid: 0, def: 0, 'nodes.entries': 0, relations: 0 } }, function (err, res) {
-      debug(err);
       assert(err === null);
       nodesRetrievedCallback(res['nodes']);
       debug(res);
@@ -74,10 +73,83 @@ module.exports = {
   getRelations: function (_eid, relationsRetrievedCallback) {
     debug('Getting relations for eid ' + _eid + ' in database');
     db.collection('terms').findOne({ eid: _eid }, { fields: { _id: 0, term: 0, eid: 0, def: 0, nodes: 0, 'relations.outRels': 0, 'relations.inRels': 0 } }, function (err, res) {
-      debug(err);
       assert(err === null);
       relationsRetrievedCallback(res['relations']);
       debug(res);
+    })
+  },
+
+  getOutRels: function (eid, page, pageSize, outRelsRetrievedCallback) {
+    db.collection('terms').findOne({ eid: eid }, {
+      fields: { _id: 0, eid: 0, term: 0, def: 0, nodes: 0, 'relations.inRels': 0 }
+    }, function (err, res) {
+      assert(err === null);
+      var startPosition = page * pageSize;
+      var position = 0;
+      var count = 0;
+      var values = [];
+      res['relations'].forEach(relation => {
+        relation['outRels'].forEach(outRel => {
+          if (position >= startPosition) {
+            if (count >= pageSize) {
+              outRelsRetrievedCallback(values);
+              return;
+            }
+            values.push(outRel);
+            count++;
+          }
+          position++;
+        });
+      });
+    })
+  },
+
+  getInRels: function (eid, page, pageSize, inRelsRetrievedCallback) {
+    db.collection('terms').findOne({ eid: eid }, {
+      fields: { _id: 0, eid: 0, term: 0, def: 0, nodes: 0, 'relations.outRels': 0 }
+    }, function (err, res) {
+      assert(err === null);
+      var startPosition = page * pageSize;
+      var position = 0;
+      var count = 0;
+      var values = [];
+      res['relations'].forEach(relation => {
+        relation['inRels'].forEach(inRel => {
+          if (position >= startPosition) {
+            if (count >= pageSize) {
+              inRelsRetrievedCallback(values);
+              return;
+            }
+            values.push(inRel);
+            count++;
+          }
+          position++;
+        });
+      });
+    })
+  },
+
+  getEntries: function (eid, page, pageSize, entriesRetrievedCallback) {
+    db.collection('terms').findOne({ eid: eid }, {
+      fields: { _id: 0, eid: 0, term: 0, def: 0, relations: 0 }
+    }, function (err, res) {
+      var startPosition = page * pageSize;
+      var position = 0;
+      var count = 0;
+      var values = [];
+      res['nodes'].forEach(node => {
+        node['entries'].forEach(entry => {
+          if (position >= startPosition) {
+            if (count >= pageSize) {
+              entriesRetrievedCallback(values);
+              return;
+            }
+            values.push(entry);
+            count++;
+          }
+          position++;
+        });
+      });
     })
   }
 };

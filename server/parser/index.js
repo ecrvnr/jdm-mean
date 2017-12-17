@@ -79,7 +79,7 @@ module.exports = {
         });
 
       } else if (new RegExp("^r;[0-9]+;" + termObject['eid']).test(element)) { //outgoing relation
-        
+
         termObject['relations'].map((relation, index) => {
           if (relation.rtid == elements[4]) {
             relation['outRels'] = (relation['outRels'] === undefined) ? relation['outRels'] = [] : relation['outRels'] = relation['outRels'];
@@ -110,14 +110,19 @@ module.exports = {
         });
       }
     })).then(function () {
-      debug('Partial term data instantiated');
-      var partialTermObject = termObject;
-      Promise.all(partialTermObject['nodes'].map(node => {
-        delete node['entries'];
-      })).then(termDataInstantiatedCallback(partialTermObject, false));
-      
       debug('Full term data instantiated');
       termDataInstantiatedCallback(termObject, true);
+      
+      var promiseNodes = Promise.all(termObject['nodes'].map(node => {
+        delete node['entries'];
+      }));
+      var promiseRelations = Promise.all(termObject['relations'].map(relation => {
+        delete relation['outRels'];
+        delete relation['inRels'];
+      }));
+      
+      debug('Partial term data instantiated');
+      Promise.all([promiseNodes, promiseRelations]).then(termDataInstantiatedCallback(termObject, false));
     });
   },
 

@@ -32,7 +32,7 @@ module.exports = function (db) {
           db.getTermData(term, function (termData) {
             termRetrievedCallback(termData);
             parser.getTermData(termData.term, function (termData, complete) {
-              if (complete) {
+              if (complete === true) {
                 db.save(termData);
               }
             });
@@ -40,7 +40,7 @@ module.exports = function (db) {
           //Else fetch it from RezoDump
         } else {
           parser.getTermData(term, function (termData, complete) {
-            if (complete) {
+            if (complete === true) {
               db.save(termData);
             } else {
               termRetrievedCallback(termData);
@@ -59,6 +59,24 @@ module.exports = function (db) {
     getRelations: function (eid, relationsRetrievedCallback) {
       db.getRelations(eid, function (data) {
         relationsRetrievedCallback(data);
+      })
+    },
+
+    getOutRels: function (eid, page, pageSize, outRelsRetrievedCallback) {
+      db.getOutRels(eid, page, pageSize, function (data) {
+        outRelsRetrievedCallback(data);
+      })
+    },
+
+    getInRels: function (eid, page, pageSize, inRelsRetrievedCallback) {
+      db.getInRels(eid, page, pageSize, function (data) {
+        inRelsRetrievedCallback(data);
+      })
+    },
+
+    getEntries: function (eid, page, pageSize, entriesRetrievedCallback) {
+      db.getEntries(eid, page, pageSize, function (data) {
+        entriesRetrievedCallback(data);
       })
     }
   }
