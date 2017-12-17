@@ -3,7 +3,7 @@
     <h4>Details</h4>
     <div>
       <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary active" (click)="show('nodes')">
+        <label class="btn btn-primary" (click)="show('nodes')">
           <input type="radio" name="nodes-relations-options" id="option1" autocomplete="off"> Node types
         </label>
         <label class="btn btn-primary" data-toggle="button" (click)="show('relations')">
@@ -12,14 +12,14 @@
       </div>
       <div style="float: right;">
         <button class="btn btn-outline-primary btn-sm" type="button" data-target="#details-table-container" data-toggle="collapse"
-          data-group-id="parent" data-role="expander">show/hide</button>
+          data-group-id="parent" data-role="expander" *ngIf="toShow != undefined">show/hide</button>
       </div>
     </div>
   </div>
   <br />
 
   <div class="table-responsive">
-    <div class="collapse" id="details-table-container" aria-expanded="false">
+    <div class="collapse show" id="details-table-container" aria-expanded="true">
       <table class="table table-striped table-hover" *ngIf="toShow == 'nodes'">
         <thead class="thead thead-dark">
           <tr>
@@ -61,4 +61,4 @@
   </div>
 </div>
 
-<app-term-collections></app-term-collections>
+<app-term-collections [term]="term"></app-term-collections>

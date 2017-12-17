@@ -11,11 +11,12 @@ import { Entry } from '../entry';
   styleUrls: ['./term-collections.component.css'],
   providers: [TermService]
 })
-export class TermCollectionsComponent {
+export class TermCollectionsComponent implements OnInit {
 
   @Input()
   term: Term;
 
+  toShow: String;
   page: Number;
   pageSize: Number;
   loading: Boolean;
@@ -26,31 +27,54 @@ export class TermCollectionsComponent {
 
   constructor(private termService: TermService) { }
 
-  getEntries() {
-    this.loading = true;
-    this.termService.getEntries(this.term.eid, this.page, this.pageSize).then((entries: Entry[]) => {
-      this.entries = entries;
-      this.loading = false;
-    });
+  ngOnInit(): void {
+    this.pageSize = 10;
+    this.page = 0;
   }
 
-  getOutRels(page: Number, pageSize: Number) {
-    this.loading = true;
-    this.termService.getOutRels(this.term.eid, this.page, this.pageSize).then((outRels: OutRel[]) => {
-      this.outRels = outRels;
-      this.loading = false;
-    });
+  setPageSize(pageSize: Number): void {
+    if (pageSize !== this.pageSize) {
+      this.pageSize = pageSize;
+      this.entries = [];
+      this.inRels = [];
+      this.outRels = [];
+      this.getCollection();
+    }
   }
 
-  getInRels(page: Number, pageSize: Number) {
+  getCollection() {
     this.loading = true;
-    this.termService.getInRels(this.term.eid, this.page, this.pageSize).then((inRels: InRel[]) => {
-      this.inRels = inRels;
-      this.loading = false;
-    });
+    switch (this.toShow) {
+      case 'entries':
+        if (this.entries.length !== this.pageSize) {
+          this.termService.getEntries(this.term.eid, this.page, this.pageSize).then((entries: Entry[]) => {
+            this.entries = entries;
+            this.loading = false;
+          });
+        }
+        break;
+
+      case 'outRels':
+        if (this.outRels.length !== this.pageSize) {
+          this.termService.getOutRels(this.term.eid, this.page, this.pageSize).then((outRels: OutRel[]) => {
+            this.outRels = outRels;
+            this.loading = false;
+          });
+        }
+        break;
+
+      case 'inRels':
+        if (this.inRels.length !== this.pageSize) {
+          this.termService.getInRels(this.term.eid, this.page, this.pageSize).then((inRels: InRel[]) => {
+            this.inRels = inRels;
+            this.loading = false;
+          });
+        }
+        break;
+    }
   }
 
-  test(): void {
-    console.log('POUET');
+  show(toShow: String): void {
+    this.toShow = toShow;
   }
 }

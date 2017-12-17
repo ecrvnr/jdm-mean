@@ -29,14 +29,14 @@
       </div>
       <br />
       <div class="collapse" id="def-list-container" aria-expanded="false">
-        <ul class="list-group collapse" id="def-list" aria-expanded="true">
+        <ul class="list-group collapse">
           <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
         </ul>
         <br />
       </div>
     </div>
 
-    <app-term-nodes-relations [_term]=term></app-term-nodes-relations>
+    <app-term-nodes-relations [term]=term></app-term-nodes-relations>
 
   </div>
 </div>

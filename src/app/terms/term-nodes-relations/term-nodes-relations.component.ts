@@ -13,20 +13,13 @@ import { TermService } from '../term.service';
 export class TermNodesRelationsComponent implements OnInit {
 
   @Input()
-  set _term(term: Term) {
-    if (term !== undefined) {
-      this.term = term;
-    }
-  }
-
   term: Term;
+
   toShow: String;
 
   constructor(private termService: TermService) { }
 
-  ngOnInit(): void { 
-    this.toShow = 'nodes';
-  }
+  ngOnInit(): void {}
 
   show(toShow: String): void {
     this.toShow = toShow;

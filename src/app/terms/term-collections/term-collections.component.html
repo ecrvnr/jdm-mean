@@ -2,17 +2,17 @@
   <div>
     <h4>Details</h4>
     <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-primary active" (click)="test()">
+      <label class="btn btn-primary" (click)="show('entries')">
         <input type="radio" name="collections-options" id="option1" autocomplete="off"> Entries
       </label>
-      <label class="btn btn-primary" data-toggle="button" (click)="test()">
+      <label class="btn btn-primary" data-toggle="button" (click)="show('outRels')">
         <input type="radio" name="collections-options" id="option2" autocomplete="off"> Outgoing relations
       </label>
-      <label class="btn btn-primary" data-toggle="button" (click)="test()">
+      <label class="btn btn-primary" data-toggle="button" (click)="show('inRels')">
         <input type="radio" name="collections-options" id="option2" autocomplete="off"> Incoming relations
       </label>
     </div>
-    <div style="float: right;">
+    <div style="float: right;" *ngIf="toShow != undefined">
       <button class="btn btn-outline-primary btn-sm" type="button" data-target="#collections-table-container" data-toggle="collapse"
         data-group-id="parent" data-role="expander">show/hide</button>
     </div>
@@ -20,19 +20,72 @@
   <br />
 
   <div class="table-responsive">
-    <div class="collapse" id="collections-table-container" aria-expanded="false">
-      <table class="table table-striped table-hover">
+    <div class="collapse show" id="collections-table-container" aria-expanded="true">
+      <table class="table table-striped table-hover" *ngIf="toShow == 'entries'">
         <thead class="thead thead-dark">
           <tr>
-            <th>rt</th>
-            <th>rtid</th>
-            <th>rtname</th>
-            <th>rtgpname</th>
-            <th>rthelp</th>
+            <th>e</th>
+            <th>eid</th>
+            <th>name</th>
+            <th>type</th>
+            <th>w</th>
+            <th>formatted name</th>            
           </tr>
         </thead>
         <tbody>
+          <tr *ngFor="let entry of entries">
+            <td> {{entry.e}} </td>
+            <td> {{entry.eid}} </td>
+            <td> {{entry.name}} </td>
+            <td> {{entry.type}} </td>
+            <td> {{entry.w}} </td>
+            <td> {{entry.formatted_name}} </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-striped table-hover" *ngIf="toShow == 'outRels'">
+        <thead class="thead thead-dark">
           <tr>
+            <th>r</th>
+            <th>rid</th>
+            <th>node 1</th>
+            <th>node 2</th>
+            <th>type</th>
+            <th>w</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let outRel of outRels">
+            <td> {{outRel.rr}} </td>
+            <td> {{outRel.rid}} </td>
+            <td> {{outRel.node1}} </td>
+            <td> {{outRel.node2}} </td>
+            <td> {{outRel.type}} </td>
+            <td> {{outRel.w}} </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-striped table-hover" *ngIf="toShow == 'inRels'">
+        <thead class="thead thead-dark">
+          <tr>
+            <th>r</th>
+            <th>rid</th>
+            <th>node 1</th>
+            <th>node 2</th>
+            <th>type</th>
+            <th>w</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inRel of inRels">
+            <td> {{inRel.rr}} </td>
+            <td> {{inRel.rid}} </td>
+            <td> {{inRel.node1}} </td>
+            <td> {{inRel.node2}} </td>
+            <td> {{inRel.type}} </td>
+            <td> {{inRel.w}} </td>
           </tr>
         </tbody>
       </table>
@@ -44,10 +97,10 @@
       Page size
     </button>
     <div class="dropdown-menu" aria-labelledby="pagesize-dropdown">
-      <a class="dropdown-item" href="#">10</a>
-      <a class="dropdown-item" href="#">25</a>
-      <a class="dropdown-item" href="#">50</a>
-      <a class="dropdown-item" href="#">100</a>
+      <a class="dropdown-item" href="#" (click)="setPageSize(10)">10</a>
+      <a class="dropdown-item" href="#" (click)="setPageSize(25)">25</a>
+      <a class="dropdown-item" href="#" (click)="setPageSize(50)">50</a>
+      <a class="dropdown-item" href="#" (click)="setPageSize(100)">100</a>
     </div>
   </div>
 </div>
