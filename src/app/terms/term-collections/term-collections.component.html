@@ -29,7 +29,7 @@
             <th>name</th>
             <th>type</th>
             <th>w</th>
-            <th>formatted name</th>            
+            <th>formatted name</th>
           </tr>
         </thead>
         <tbody>
@@ -91,8 +91,21 @@
       </table>
     </div>
   </div>
+
+  <div class="sk-cube-grid" *ngIf="loading">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+  </div>
+
   <div class="btn-group">
-    <button type="button" id="pagesize-dropdown" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+    <button type="button" id="pagesize-dropdown" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
       aria-expanded="true">
       Page size
     </button>

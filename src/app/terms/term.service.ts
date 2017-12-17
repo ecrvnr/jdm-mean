@@ -54,7 +54,7 @@ export class TermService {
 
   // get("/api/terms/out/:eid/:page/:pageSize")
   getOutRels(eid: Number, page: Number, pageSize: Number): Promise<void | OutRel[]> {
-    return this.http.get(this.termsUrl + '/out/' + eid + '/' + page + '/' + pageSize)
+    return this.http.get(this.termsUrl + '/' + eid + '/outrels/' + page + '/' + pageSize)
       .toPromise()
       .then(response => response.json() as OutRel[])
       .catch(this.handleError);
@@ -62,15 +62,15 @@ export class TermService {
 
   // get("/api/terms/in/:eid/:page/:pageSize")
   getInRels(eid: Number, page: Number, pageSize: Number): Promise<void | InRel[]> {
-    return this.http.get(this.termsUrl + '/in/' + eid + '/' + page + '/' + pageSize)
+    return this.http.get(this.termsUrl + '/' + eid + '/inrels/' + page + '/' + pageSize)
       .toPromise()
       .then(response => response.json() as InRel[])
       .catch(this.handleError);
   }
 
-  // get("/api/entries/out/:eid/:page/:pageSize")
+  // get("/api/terms/entries/:eid/:page/:pageSize")
   getEntries(eid: Number, page: Number, pageSize: Number): Promise<void | Entry[]> {
-    return this.http.get(this.termsUrl + '/entries/' + eid + '/' + page + '/' + pageSize)
+    return this.http.get(this.termsUrl + '/' + eid + '/entries/' + page + '/' + pageSize)
       .toPromise()
       .then(response => response.json() as Entry[])
       .catch(this.handleError);

@@ -29,6 +29,9 @@ export class TermCollectionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageSize = 10;
+    this.entries = [];
+    this.inRels = [];
+    this.outRels = [];
     this.page = 0;
   }
 
@@ -76,5 +79,6 @@ export class TermCollectionsComponent implements OnInit {
 
   show(toShow: String): void {
     this.toShow = toShow;
+    this.getCollection();
   }
 }
