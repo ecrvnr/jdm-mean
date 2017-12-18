@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 // Create link to Angular build directory
 app.use(express.static(path.join(__dirname, 'dist')));
   // Initialize the app.
-  var server = app.listen(process.env.PORT || 8080, function () {
+  var server = app.listen(process.env.PORT || 8081, function () {
     var port = server.address().port;
     console.log('App now running on port', port);
   });

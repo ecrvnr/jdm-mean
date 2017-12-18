@@ -88,19 +88,20 @@ module.exports = {
       var position = 0;
       var count = 0;
       var values = [];
-      res['relations'].forEach(relation => {
-        relation['outRels'].forEach(outRel => {
+
+      for(var i = 0 ; i < res['relations'].length ; i++){
+        for(var j = 0 ; j < res['relations'][i]['outRels'].length; j++){
           if (position >= startPosition) {
             if (count >= pageSize) {
               outRelsRetrievedCallback(values);
               return;
             }
-            values.push(outRel);
+            values.push(res['relations'][i]['outRels'][j]);
             count++;
           }
           position++;
-        });
-      });
+        }
+      }
     })
   },
 
@@ -113,19 +114,19 @@ module.exports = {
       var position = 0;
       var count = 0;
       var values = [];
-      res['relations'].forEach(relation => {
-        relation['inRels'].forEach(inRel => {
+      for(var i = 0 ; i < res['relations'].length ; i++){
+        for(var j = 0 ; j < res['relations'][i]['inRels'].length; j++){
           if (position >= startPosition) {
             if (count >= pageSize) {
               inRelsRetrievedCallback(values);
               return;
             }
-            values.push(inRel);
+            values.push(res['relations'][i]['inRels'][j]);
             count++;
           }
           position++;
-        });
-      });
+        }
+      }
     })
   },
 
@@ -137,19 +138,19 @@ module.exports = {
       var position = 0;
       var count = 0;
       var values = [];
-      res['nodes'].forEach(node => {
-        node['entries'].forEach(entry => {
+      for(var i = 0 ; i < res['nodes'].length ; i++){
+        for(var j = 0 ; j < res['nodes'][i]['entries'].length; j++){
           if (position >= startPosition) {
             if (count >= pageSize) {
               entriesRetrievedCallback(values);
               return;
             }
-            values.push(entry);
+            values.push(res['nodes'][i]['entries'][j]);
             count++;
           }
           position++;
-        });
-      });
+        }
+      }
     })
   }
 };
