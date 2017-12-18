@@ -41,15 +41,16 @@ export class TermCollectionsComponent implements OnInit {
       this.entries = [];
       this.inRels = [];
       this.outRels = [];
+      this.page = 0;
       this.getCollection();
     }
   }
 
   getCollection() {
-    this.loading = true;
     switch (this.toShow) {
       case 'entries':
         if (this.entries.length !== this.pageSize) {
+          this.loading = true;
           this.termService.getEntries(this.term.eid, this.page, this.pageSize).then((entries: Entry[]) => {
             this.entries = entries;
             this.loading = false;
@@ -59,6 +60,7 @@ export class TermCollectionsComponent implements OnInit {
 
       case 'outRels':
         if (this.outRels.length !== this.pageSize) {
+          this.loading = true;
           this.termService.getOutRels(this.term.eid, this.page, this.pageSize).then((outRels: OutRel[]) => {
             this.outRels = outRels;
             this.loading = false;
@@ -68,6 +70,7 @@ export class TermCollectionsComponent implements OnInit {
 
       case 'inRels':
         if (this.inRels.length !== this.pageSize) {
+          this.loading = true;
           this.termService.getInRels(this.term.eid, this.page, this.pageSize).then((inRels: InRel[]) => {
             this.inRels = inRels;
             this.loading = false;
@@ -79,6 +82,19 @@ export class TermCollectionsComponent implements OnInit {
 
   show(toShow: String): void {
     this.toShow = toShow;
+    this.getCollection();
+  }
+
+  switchPage(direction: String): void {
+    this.entries = [];
+    this.outRels = [];
+    this.inRels = [];
+
+    if (direction === 'previous') {
+      this.page = Number(this.page) - 1;
+    } else {
+      this.page = Number(this.page) + 1;
+    }
     this.getCollection();
   }
 }

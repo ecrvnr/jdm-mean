@@ -37,13 +37,6 @@ export class TermService {
       .catch(this.handleError);
   }
 
-
-
-
-
-
-
-
   // get("/api/terms")
   getAllTerms(): Promise<void | Term[]> {
     return this.http.get(this.termsUrl)
