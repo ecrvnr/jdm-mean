@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <app-term-nodes-relations [term]=term></app-term-nodes-relations>
+        <app-term-nodes-relations (searchEvent)="searchTerm($event)" [term]=term></app-term-nodes-relations>
 
     </div>
 </div>

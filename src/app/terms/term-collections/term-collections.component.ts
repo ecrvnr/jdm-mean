@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { TermService } from '../term.service';
 import { Term } from '../term';
 import { OutRel } from '../outRel';
@@ -15,6 +15,9 @@ export class TermCollectionsComponent implements OnInit {
 
     @Input()
     term: Term;
+
+    @Output()
+    searchEvent = new EventEmitter<string>();
 
     toShow: String;
     page: Number;
@@ -96,5 +99,9 @@ export class TermCollectionsComponent implements OnInit {
             this.page = Number(this.page) + 1;
         }
         this.getCollection();
+    }
+
+    searchTerm(term: string): void {
+        this.searchEvent.next(term.substring(1, term.length - 1));
     }
 }

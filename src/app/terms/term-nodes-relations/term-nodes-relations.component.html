@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let node of term.nodes">
+                    <tr *ngFor="let node of term.nodes" (click)="selectItem(node)">
                         <td> {{node.nt}} </td>
                         <td> {{node.ntid}} </td>
                         <td> {{node.ntname}} </td>
@@ -48,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let relation of term.relations">
+                    <tr *ngFor="let relation of term.relations" (click)="selectItem(relation)">
                         <td> {{relation.rt}} </td>
                         <td> {{relation.rtid}} </td>
                         <td> {{relation.rtname}} </td>
@@ -61,4 +61,4 @@
     </div>
 </div>
 
-<app-term-collections [term]="term"></app-term-collections>
+<app-term-collections (searchEvent)="searchTerm($event)" [term]="term"></app-term-collections>

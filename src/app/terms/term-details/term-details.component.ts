@@ -28,6 +28,7 @@ export class TermDetailsComponent implements OnInit {
     }
 
     searchTerm(string: String): void {
+        console.log('Searching for term ' + string);
         this.term = null;
         this.loading = true;
         this.termService.getTerm(string)

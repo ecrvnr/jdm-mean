@@ -33,7 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let entry of entries">
+                    <tr *ngFor="let entry of entries" (click)="searchTerm(entry.name)">
                         <td> {{entry.e}} </td>
                         <td> {{entry.eid}} </td>
                         <td> {{entry.name}} </td>
