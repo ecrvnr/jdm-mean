@@ -83,11 +83,11 @@ module.exports = {
         db.collection('terms').findOne({ eid: eid }, {
             fields: { _id: 0, eid: 0, term: 0, def: 0, nodes: 0, 'relations.inRels': 0 }
         }, function (err, res) {
-            if (err !== null) {
+            assert(err === null);
+            if (res === undefined) {
                 outRelsRetrievedCallback({});
                 return;
             }
-            assert(err === null);
             var startPosition = page * pageSize;
             var position = 0;
             var count = 0;
@@ -123,11 +123,11 @@ module.exports = {
         db.collection('terms').findOne({ eid: eid }, {
             fields: { _id: 0, eid: 0, term: 0, def: 0, nodes: 0, 'relations.outRels': 0 }
         }, function (err, res) {
-            if (err !== null) {
+            assert(err === null);
+            if (res === undefined) {
                 inRelsRetrievedCallback({});
                 return;
             }
-            assert(err === null);
             var startPosition = page * pageSize;
             var position = 0;
             var count = 0;
@@ -163,7 +163,8 @@ module.exports = {
         db.collection('terms').findOne({ eid: eid }, {
             fields: { _id: 0, eid: 0, term: 0, def: 0, relations: 0 }
         }, function (err, res) {
-            if (err !== null) {
+            assert(err === null)
+            if (res === undefined) {
                 entriesRetrievedCallback({});
                 return;
             }
