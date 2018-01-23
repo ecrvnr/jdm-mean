@@ -1,42 +1,42 @@
 <div class="container">
-  <div class="sk-cube-grid" *ngIf="loading">
-    <div class="sk-cube sk-cube1"></div>
-    <div class="sk-cube sk-cube2"></div>
-    <div class="sk-cube sk-cube3"></div>
-    <div class="sk-cube sk-cube4"></div>
-    <div class="sk-cube sk-cube5"></div>
-    <div class="sk-cube sk-cube6"></div>
-    <div class="sk-cube sk-cube7"></div>
-    <div class="sk-cube sk-cube8"></div>
-    <div class="sk-cube sk-cube9"></div>
-  </div>
-
-  <div *ngIf="term">
-    <br />
-    <div>
-      <h1>{{ term.term }}</h1>
-      <h3>eid: {{ term.eid }}</h3>
+    <div class="sk-cube-grid" *ngIf="loading">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
     </div>
-    <br />
 
-    <div *ngIf="term.def.length > 0">
-      <div>
-        <h4 style="float:left;">Definitions</h4>
-        <div style="text-align: right;">
-          <button class="btn btn-outline-primary btn-sm" type="button" data-target="#def-list-container" data-toggle="collapse" data-group-id="parent"
-            data-role="expander">show/hide</button>
-        </div>
-      </div>
-      <br />
-      <div class="collapse" id="def-list-container" aria-expanded="false">
-        <ul class="list-group collapse">
-          <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
-        </ul>
+    <div *ngIf="term">
         <br />
-      </div>
+        <div>
+            <h1>{{ term.term }}</h1>
+            <h3>eid: {{ term.eid }}</h3>
+        </div>
+        <br />
+
+        <div *ngIf="term.def.length > 0">
+            <div>
+                <h4 style="float:left;">Definitions</h4>
+                <div style="text-align: right;">
+                    <button class="btn btn-outline-primary btn-sm" type="button" data-target="#def-list-container" data-toggle="collapse" data-group-id="parent"
+                        data-role="expander">show/hide</button>
+                </div>
+            </div>
+            <br />
+            <div class="collapse" id="def-list-container" aria-expanded="false">
+                <ul class="list-group collapse">
+                    <li class="list-group-item" *ngFor="let definition of term.def"> {{ definition }} </li>
+                </ul>
+                <br />
+            </div>
+        </div>
+
+        <app-term-nodes-relations [term]=term></app-term-nodes-relations>
+
     </div>
-
-    <app-term-nodes-relations [term]=term></app-term-nodes-relations>
-
-  </div>
 </div>

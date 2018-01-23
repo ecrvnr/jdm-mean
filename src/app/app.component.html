@@ -1,31 +1,31 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
-  <div style="display: inline;">
-    <a class="navbar-brand" href="http://www.jeuxdemots.org/jdm-accueil.php">
-      <img class="logo" src="../../../assets/img/logo.png" alt="Logo jeuxDeMots" />
-    </a>
-  </div>
+    <div style="display: inline;">
+        <a class="navbar-brand" href="http://www.jeuxdemots.org/jdm-accueil.php">
+            <img class="logo" src="../../../assets/img/logo.png" alt="Logo jeuxDeMots" />
+        </a>
+    </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto ml-auto">
-      <li class="nav-item">
-        <div class="justify-content-md-center">
-          <form novalidate (ngSubmit)="search()" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" name="term" [(ngModel)]="placeHolderString" placeholder="Search term..."
-              aria-label="Search" style="width: 600px;">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ml-auto">
+            <li class="nav-item">
+                <div class="justify-content-md-center">
+                    <form novalidate (ngSubmit)="search()" class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" name="term" [(ngModel)]="placeHolderString" placeholder="Search term..."
+                            aria-label="Search" style="width: 600px;">
 
-            <button class="btn btn-outline-primary" type="button" (click)="search()">
-              Search
-            </button>
-          </form>
-        </div>
-      </li>
-    </ul>
-  </div>
+                        <button class="btn btn-outline-primary" type="button" (click)="search()">
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
 
-  <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 </nav>
 
 <!--The content below is only a placeholder and can be replaced.-->

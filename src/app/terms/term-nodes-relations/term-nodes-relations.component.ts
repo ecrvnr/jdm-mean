@@ -5,23 +5,23 @@ import { Relation } from '../relation';
 import { TermService } from '../term.service';
 
 @Component({
-  selector: 'app-term-nodes-relations',
-  templateUrl: './term-nodes-relations.component.html',
-  styleUrls: ['./term-nodes-relations.component.css'],
-  providers: [TermService]
+    selector: 'app-term-nodes-relations',
+    templateUrl: './term-nodes-relations.component.html',
+    styleUrls: ['./term-nodes-relations.component.css'],
+    providers: [TermService]
 })
 export class TermNodesRelationsComponent implements OnInit {
 
-  @Input()
-  term: Term;
+    @Input()
+    term: Term;
 
-  toShow: String;
+    toShow: String;
 
-  constructor(private termService: TermService) { }
+    constructor(private termService: TermService) { }
 
-  ngOnInit(): void {}
+    ngOnInit(): void { }
 
-  show(toShow: String): void {
-    this.toShow = toShow;
-  }
+    show(toShow: String): void {
+        this.toShow = toShow;
+    }
 }

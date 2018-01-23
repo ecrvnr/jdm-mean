@@ -4,27 +4,27 @@ import { TermService } from './terms/term.service';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [TermService]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    providers: [TermService]
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+    title = 'app';
 
-  placeHolderString: String;
-  termString: String;
+    placeHolderString: String;
+    termString: String;
 
-  constructor(private termService: TermService) { }
+    constructor(private termService: TermService) { }
 
-  ngOnInit() {
-    this.placeHolderString = '';
-  }
-
-  search() {
-    if (this.placeHolderString.length > 0) {
-      this.termString = this.placeHolderString;
-      this.placeHolderString = '';
+    ngOnInit() {
+        this.placeHolderString = '';
     }
-  }
+
+    search() {
+        if (this.placeHolderString.length > 0) {
+            this.termString = this.placeHolderString;
+            this.placeHolderString = '';
+        }
+    }
 }

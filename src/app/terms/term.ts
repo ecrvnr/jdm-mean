@@ -6,10 +6,10 @@ import { Relation } from './relation';
 
 
 export class Term {
-  _id: String;
-  term: String;
-  eid: Number;
-  def: String[];
-  nodes: Node[];
-  relations: Relation[];
+    _id: String;
+    term: String;
+    eid: Number;
+    def: String[];
+    nodes: Node[];
+    relations: Relation[];
 }

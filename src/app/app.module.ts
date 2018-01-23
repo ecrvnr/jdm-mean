@@ -11,19 +11,19 @@ import { TermNodesRelationsComponent } from './terms/term-nodes-relations/term-n
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TermDetailsComponent,
-    TermCollectionsComponent,
-    TermNodesRelationsComponent,
-  ],
-  imports: [
-    HttpModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        TermDetailsComponent,
+        TermCollectionsComponent,
+        TermNodesRelationsComponent,
+    ],
+    imports: [
+        HttpModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

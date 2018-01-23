@@ -1,125 +1,125 @@
 <div>
-  <div>
-    <h4>Details</h4>
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-primary" (click)="show('entries')">
-        <input type="radio" name="collections-options" id="option1" autocomplete="off"> Entries
-      </label>
-      <label class="btn btn-primary" data-toggle="button" (click)="show('outRels')">
-        <input type="radio" name="collections-options" id="option2" autocomplete="off"> Outgoing relations
-      </label>
-      <label class="btn btn-primary" data-toggle="button" (click)="show('inRels')">
-        <input type="radio" name="collections-options" id="option2" autocomplete="off"> Incoming relations
-      </label>
+    <div>
+        <h4>Details</h4>
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary" (click)="show('entries')">
+                <input type="radio" name="collections-options" id="option1" autocomplete="off"> Entries
+            </label>
+            <label class="btn btn-primary" data-toggle="button" (click)="show('outRels')">
+                <input type="radio" name="collections-options" id="option2" autocomplete="off"> Outgoing relations
+            </label>
+            <label class="btn btn-primary" data-toggle="button" (click)="show('inRels')">
+                <input type="radio" name="collections-options" id="option2" autocomplete="off"> Incoming relations
+            </label>
+        </div>
+        <div style="float: right;" *ngIf="toShow != undefined">
+            <button class="btn btn-outline-primary btn-sm" type="button" data-target="#collections-table-container" data-toggle="collapse"
+                data-group-id="parent" data-role="expander">show/hide</button>
+        </div>
     </div>
-    <div style="float: right;" *ngIf="toShow != undefined">
-      <button class="btn btn-outline-primary btn-sm" type="button" data-target="#collections-table-container" data-toggle="collapse"
-        data-group-id="parent" data-role="expander">show/hide</button>
+    <br />
+
+    <div class="table-responsive">
+        <div class="collapse show" id="collections-table-container" aria-expanded="true" *ngIf="toShow != undefined">
+            <table class="table table-striped table-hover" *ngIf="toShow == 'entries'">
+                <thead class="thead thead-dark">
+                    <tr>
+                        <th>e</th>
+                        <th>eid</th>
+                        <th>name</th>
+                        <th>type</th>
+                        <th>w</th>
+                        <th>formatted name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let entry of entries">
+                        <td> {{entry.e}} </td>
+                        <td> {{entry.eid}} </td>
+                        <td> {{entry.name}} </td>
+                        <td> {{entry.type}} </td>
+                        <td> {{entry.w}} </td>
+                        <td> {{entry.formatted_name}} </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-striped table-hover" *ngIf="toShow == 'outRels'">
+                <thead class="thead thead-dark">
+                    <tr>
+                        <th>r</th>
+                        <th>rid</th>
+                        <th>node 1</th>
+                        <th>node 2</th>
+                        <th>type</th>
+                        <th>w</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let outRel of outRels">
+                        <td> {{outRel.r}} </td>
+                        <td> {{outRel.rid}} </td>
+                        <td> {{outRel.node1}} </td>
+                        <td> {{outRel.node2}} </td>
+                        <td> {{outRel.type}} </td>
+                        <td> {{outRel.w}} </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-striped table-hover" *ngIf="toShow == 'inRels'">
+                <thead class="thead thead-dark">
+                    <tr>
+                        <th>r</th>
+                        <th>rid</th>
+                        <th>node 1</th>
+                        <th>node 2</th>
+                        <th>type</th>
+                        <th>w</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inRel of inRels">
+                        <td> {{inRel.r}} </td>
+                        <td> {{inRel.rid}} </td>
+                        <td> {{inRel.node1}} </td>
+                        <td> {{inRel.node2}} </td>
+                        <td> {{inRel.type}} </td>
+                        <td> {{inRel.w}} </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <button style="float:left;" *ngIf="page != 0" class="btn btn-outline-primary btn-sm" type="button" (click)="switchPage('previous')">previous page</button>
+                <button style="float:right;" class="btn btn-outline-primary btn-sm" type="button" (click)="switchPage('next')">next page</button>
+            </div>
+        </div>
     </div>
-  </div>
-  <br />
 
-  <div class="table-responsive">
-    <div class="collapse show" id="collections-table-container" aria-expanded="true" *ngIf="toShow != undefined">
-      <table class="table table-striped table-hover" *ngIf="toShow == 'entries'">
-        <thead class="thead thead-dark">
-          <tr>
-            <th>e</th>
-            <th>eid</th>
-            <th>name</th>
-            <th>type</th>
-            <th>w</th>
-            <th>formatted name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let entry of entries">
-            <td> {{entry.e}} </td>
-            <td> {{entry.eid}} </td>
-            <td> {{entry.name}} </td>
-            <td> {{entry.type}} </td>
-            <td> {{entry.w}} </td>
-            <td> {{entry.formatted_name}} </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table class="table table-striped table-hover" *ngIf="toShow == 'outRels'">
-        <thead class="thead thead-dark">
-          <tr>
-            <th>r</th>
-            <th>rid</th>
-            <th>node 1</th>
-            <th>node 2</th>
-            <th>type</th>
-            <th>w</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let outRel of outRels">
-            <td> {{outRel.r}} </td>
-            <td> {{outRel.rid}} </td>
-            <td> {{outRel.node1}} </td>
-            <td> {{outRel.node2}} </td>
-            <td> {{outRel.type}} </td>
-            <td> {{outRel.w}} </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table class="table table-striped table-hover" *ngIf="toShow == 'inRels'">
-        <thead class="thead thead-dark">
-          <tr>
-            <th>r</th>
-            <th>rid</th>
-            <th>node 1</th>
-            <th>node 2</th>
-            <th>type</th>
-            <th>w</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let inRel of inRels">
-            <td> {{inRel.r}} </td>
-            <td> {{inRel.rid}} </td>
-            <td> {{inRel.node1}} </td>
-            <td> {{inRel.node2}} </td>
-            <td> {{inRel.type}} </td>
-            <td> {{inRel.w}} </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div>
-        <button style="float:left;" *ngIf="page != 0" class="btn btn-outline-primary btn-sm" type="button" (click)="switchPage('previous')">previous page</button>
-        <button style="float:right;" class="btn btn-outline-primary btn-sm" type="button" (click)="switchPage('next')">next page</button>
-      </div>
+    <div class="sk-cube-grid" *ngIf="loading">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
     </div>
-  </div>
+    <br />
 
-  <div class="sk-cube-grid" *ngIf="loading">
-    <div class="sk-cube sk-cube1"></div>
-    <div class="sk-cube sk-cube2"></div>
-    <div class="sk-cube sk-cube3"></div>
-    <div class="sk-cube sk-cube4"></div>
-    <div class="sk-cube sk-cube5"></div>
-    <div class="sk-cube sk-cube6"></div>
-    <div class="sk-cube sk-cube7"></div>
-    <div class="sk-cube sk-cube8"></div>
-    <div class="sk-cube sk-cube9"></div>
-  </div>
-  <br />
-
-  <div class="btn-group" style="margin-bottom: 20px;">
-    <button type="button" id="pagesize-dropdown" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="true">
-      Page size
-    </button>
-    <div class="dropdown-menu" aria-labelledby="pagesize-dropdown">
-      <a class="dropdown-item" href="#" (click)="setPageSize(10)">10</a>
-      <a class="dropdown-item" href="#" (click)="setPageSize(25)">25</a>
-      <a class="dropdown-item" href="#" (click)="setPageSize(50)">50</a>
-      <a class="dropdown-item" href="#" (click)="setPageSize(100)">100</a>
+    <div class="btn-group" style="margin-bottom: 20px;">
+        <button type="button" id="pagesize-dropdown" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="true">
+            Page size
+        </button>
+        <div class="dropdown-menu" aria-labelledby="pagesize-dropdown">
+            <a class="dropdown-item" href="#" (click)="setPageSize(10)">10</a>
+            <a class="dropdown-item" href="#" (click)="setPageSize(25)">25</a>
+            <a class="dropdown-item" href="#" (click)="setPageSize(50)">50</a>
+            <a class="dropdown-item" href="#" (click)="setPageSize(100)">100</a>
+        </div>
     </div>
-  </div>
 </div>
